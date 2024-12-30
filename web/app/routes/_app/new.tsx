@@ -161,7 +161,7 @@ function RouteComponent() {
   }
 
   const handleAddTag = (tag: string) => {
-    const normalizedTag = tag.toLowerCase().trim()
+    const normalizedTag = tag.toLowerCase().trim().replace(/\s+/g, "_")
     if (
       normalizedTag &&
       !form.state.values.tags.includes(normalizedTag) &&
@@ -169,6 +169,13 @@ function RouteComponent() {
     ) {
       form.setFieldValue("tags", [...form.state.values.tags, normalizedTag])
       setInputTag("")
+    }
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault()
+      handleAddTag(inputTag)
     }
   }
 
@@ -198,6 +205,43 @@ function RouteComponent() {
     form.setFieldValue("tags", newTags)
   }
 
+  const formatFileSize = (size: number) => {
+    if (size < 1024) {
+      return `${size} bytes`
+    } else if (size < 1024 * 1024) {
+      return `${(size / 1024).toFixed(2)} KB`
+    } else if (size < 1024 * 1024 * 1024) {
+      return `${(size / (1024 * 1024)).toFixed(2)} MB`
+    } else {
+      return `${(size / (1024 * 1024 * 1024)).toFixed(2)} GB`
+    }
+  }
+
+  const getFileIcon = (fileName: string): string => {
+    const extension = fileName.split(".").pop()?.toLowerCase() || ""
+
+    if (["jpg", "jpeg", "png", "gif", "svg", "webp"].includes(extension))
+      return "🖼️"
+
+    if (["doc", "docx"].includes(extension)) return "📝"
+    if (["pdf"].includes(extension)) return "📕"
+    if (["txt"].includes(extension)) return "📄"
+    if (["xls", "xlsx"].includes(extension)) return "📊"
+    if (["ppt", "pptx"].includes(extension)) return "📽️"
+
+    if (["js", "jsx", "ts", "tsx"].includes(extension)) return "⚛️"
+    if (["html", "css"].includes(extension)) return "🌐"
+    if (["py"].includes(extension)) return "🐍"
+    if (["json"].includes(extension)) return "{ }"
+
+    if (["zip", "rar", "7z"].includes(extension)) return "🗜️"
+    if (["mp3", "wav", "ogg"].includes(extension)) return "🎵"
+    if (["mp4", "mov", "avi"].includes(extension)) return "🎬"
+    if (["ai", "psd", "sketch"].includes(extension)) return "🎨"
+
+    return "📄"
+  }
+
   return (
     <div className="min-h-screen py-10">
       <div className="max-w-5xl mx-auto p-6">
@@ -218,25 +262,6 @@ function RouteComponent() {
                   products. From educational content to collectibles — bring
                   your vision to life.
                 </p>
-              </div>
-
-              <div className="flex gap-3">
-                <button
-                  disabled={!category}
-                  onClick={handleNextStep}
-                  className={cn(
-                    "flex-1 bg-transparent text-lg flex items-center justify-center gap-2 transition-all duration-300",
-                    {
-                      "opacity-50 cursor-not-allowed text-black dark:text-white":
-                        !category,
-                      "hover:opacity-90 hover:translate-x-1 font-semibold text-[var(--neon-cyan)]":
-                        category,
-                    },
-                  )}
-                >
-                  Next: Customize
-                  <ArrowRight className="w-4 h-4" />
-                </button>
               </div>
             </div>
 
@@ -283,6 +308,15 @@ function RouteComponent() {
                 </motion.div>
               ))}
             </div>
+            {category && (
+              <button
+                onClick={handleNextStep}
+                className="mt-6 bg-[var(--neon-cyan)] dark:text-black text-white p-3 rounded-lg  items-center justify-center flex gap-2 hover:bg-opacity-90 font-pressStart"
+              >
+                Go to Step 2
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </button>
+            )}
           </div>
         ) : (
           <motion.form
@@ -403,15 +437,12 @@ function RouteComponent() {
                           <div className="absolute inset-0 border border-[var(--neon-cyan)]/20 transition-colors duration-300 group-hover:border-[var(--neon-cyan)]" />
                           <Input
                             type="text"
-                            placeholder="#add tag"
+                            placeholder="#add_tag"
                             value={inputTag}
-                            onChange={(e) => setInputTag(e.target.value)}
-                            onKeyDown={(e) => {
-                              if (e.key === "Enter") {
-                                e.preventDefault()
-                                handleAddTag(inputTag)
-                              }
-                            }}
+                            onChange={(e) =>
+                              setInputTag(e.target.value.replace(/\s+/g, "_"))
+                            }
+                            onKeyDown={handleKeyDown}
                             className="relative text-center font-mono bg-transparent border-0 shadow-none placeholder:text-black/40 dark:placeholder:text-[var(--neon-cyan)] text-black dark:text-white px-4 py-3 transition-all duration-300 focus:shadow-[0_0_0_1px_var(--neon-cyan)] focus:bg-black/5 dark:focus:bg-white/5"
                           />
                           <div className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 border-r-2 border-t-2 border-[var(--neon-cyan)]/30" />
@@ -459,7 +490,7 @@ function RouteComponent() {
                       <Input
                         type="text"
                         placeholder="Product Name*"
-                        className="h-12 border-b placeholder:font-pressStart text-sm lg:text-md border-b-gray-300 dark:border-b-gray-700 hover:opacity-100 transition-all duration-300"
+                        className="h-12 border-b placeholder:font-pressStart text-md lg:text-lg font-semibold border-b-gray-300 dark:border-b-gray-700 hover:opacity-100 transition-all duration-300"
                         value={field.state.value}
                         onChange={(e) => field.handleChange(e.target.value)}
                       />
@@ -511,7 +542,9 @@ function RouteComponent() {
                             className="relative aspect-[3/2] rounded-lg overflow-hidden border-2 border-gray-300 dark:border-gray-700 p-4 backdrop-blur-sm"
                           >
                             <div className="flex flex-col items-center justify-center h-full gap-2">
-                              <div className="text-4xl">📄</div>
+                              <div className="text-4xl">
+                                {getFileIcon(doc.name)}
+                              </div>
                               <div className="w-full px-2">
                                 <p className="text-sm text-center text-gray-700 dark:text-gray-300 truncate max-w-full break-all">
                                   {doc.name.length > 20
@@ -520,7 +553,7 @@ function RouteComponent() {
                                 </p>
                               </div>
                               <p className="text-xs text-gray-500">
-                                {(doc.size / 1024 / 1024).toFixed(2)} MB
+                                {formatFileSize(doc.size)}
                               </p>
                             </div>
                             <button
