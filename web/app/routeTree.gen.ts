@@ -11,6 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as NewEditImport } from './routes/new-edit'
 import { Route as AppRouteImport } from './routes/_app/route'
 import { Route as AppIndexImport } from './routes/_app/index'
 import { Route as AppProfileImport } from './routes/_app/profile'
@@ -19,6 +20,12 @@ import { Route as AppNewImport } from './routes/_app/new'
 import { Route as AppAuthImport } from './routes/_app/auth'
 
 // Create/Update Routes
+
+const NewEditRoute = NewEditImport.update({
+  id: '/new-edit',
+  path: '/new-edit',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AppRouteRoute = AppRouteImport.update({
   id: '/_app',
@@ -64,6 +71,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/new-edit': {
+      id: '/new-edit'
+      path: '/new-edit'
+      fullPath: '/new-edit'
+      preLoaderRoute: typeof NewEditImport
       parentRoute: typeof rootRoute
     }
     '/_app/auth': {
@@ -128,6 +142,7 @@ const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   '': typeof AppRouteRouteWithChildren
+  '/new-edit': typeof NewEditRoute
   '/auth': typeof AppAuthRoute
   '/new': typeof AppNewRoute
   '/product': typeof AppProductRoute
@@ -136,6 +151,7 @@ export interface FileRoutesByFullPath {
 }
 
 export interface FileRoutesByTo {
+  '/new-edit': typeof NewEditRoute
   '/auth': typeof AppAuthRoute
   '/new': typeof AppNewRoute
   '/product': typeof AppProductRoute
@@ -146,6 +162,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_app': typeof AppRouteRouteWithChildren
+  '/new-edit': typeof NewEditRoute
   '/_app/auth': typeof AppAuthRoute
   '/_app/new': typeof AppNewRoute
   '/_app/product': typeof AppProductRoute
@@ -155,12 +172,13 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/auth' | '/new' | '/product' | '/profile' | '/'
+  fullPaths: '' | '/new-edit' | '/auth' | '/new' | '/product' | '/profile' | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/auth' | '/new' | '/product' | '/profile' | '/'
+  to: '/new-edit' | '/auth' | '/new' | '/product' | '/profile' | '/'
   id:
     | '__root__'
     | '/_app'
+    | '/new-edit'
     | '/_app/auth'
     | '/_app/new'
     | '/_app/product'
@@ -171,10 +189,12 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   AppRouteRoute: typeof AppRouteRouteWithChildren
+  NewEditRoute: typeof NewEditRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   AppRouteRoute: AppRouteRouteWithChildren,
+  NewEditRoute: NewEditRoute,
 }
 
 export const routeTree = rootRoute
@@ -187,7 +207,8 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/_app"
+        "/_app",
+        "/new-edit"
       ]
     },
     "/_app": {
@@ -199,6 +220,9 @@ export const routeTree = rootRoute
         "/_app/profile",
         "/_app/"
       ]
+    },
+    "/new-edit": {
+      "filePath": "new-edit.tsx"
     },
     "/_app/auth": {
       "filePath": "_app/auth.tsx",
