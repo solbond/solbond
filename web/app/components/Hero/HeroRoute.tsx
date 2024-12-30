@@ -239,7 +239,7 @@ export const HeroRoute = () => {
           </div>
 
           <div className="overflow-hidden px-4 relative shadow-lg flex items-center w-full rounded-xl min-h-[400px] mb-[2em] md:mb-0 md:min-h-[200px]">
-            <motion.p
+            <motion.div
               className="text-3xl w-[70%] relative z-20"
               initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -250,14 +250,14 @@ export const HeroRoute = () => {
                 <span className="text-emerald-700 dark:text-emerald-400 font-normal">
                   buy and sell digital products.
                 </span>
-                <motion.div
-                  className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-emerald-500 via-cyan-500 to-[var(--neon-cyan)]"
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 1, delay: 1.5 }}
-                />
               </span>
-            </motion.p>
+              <motion.div
+                className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-emerald-500 via-cyan-500 to-[var(--neon-cyan)]"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 1, delay: 1.5 }}
+              />
+            </motion.div>
 
             <motion.div
               animate={{

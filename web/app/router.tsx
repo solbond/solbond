@@ -10,6 +10,7 @@ export function createRouter() {
   return routerWithQueryClient(
     createTanStackRouter({
       routeTree,
+      defaultSsr: false,
       context: { queryClient },
       defaultPreload: "intent",
       defaultErrorComponent: DefaultCatchBoundary,
