@@ -9,4 +9,17 @@ export default defineConfig({
       }),
     ],
   },
+  server: {
+    preset: "vercel",
+  },
+  tsr: {
+    customScaffolding: {
+      routeTemplate: [
+        "%%tsrImports%%",
+        "\n\n",
+        "function RouteComponent() { return <></> };\n\n",
+        "%%tsrExportStart%%{\n component: RouteComponent\n }%%tsrExportEnd%%\n",
+      ].join(""),
+    },
+  },
 })
