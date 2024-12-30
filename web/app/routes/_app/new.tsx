@@ -21,7 +21,7 @@ function RouteComponent() {
       if (selectedType) {
         navigate({
           to: "/new-edit",
-          // search: { category: selectedType.category },
+          search: { category: selectedType.category },
         })
       }
     }

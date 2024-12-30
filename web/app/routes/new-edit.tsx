@@ -30,13 +30,10 @@ export interface ProductForm {
   documents: File[]
 }
 
-export const Route = createFileRoute("/new-edit")({
-  component: RouteComponent,
-})
-
 function RouteComponent() {
   const [step, setStep] = useState<"type" | "customize">("type")
-  const [category, setCategory] = useState<string>("")
+  const { category } = Route.useSearch()
+  console.log(category, "category")
   const [description, setDescription] = useState("")
   const [showPreview, setShowPreview] = useState(false)
   const { user } = useAuth()
@@ -302,13 +299,7 @@ function RouteComponent() {
             <div className="lg:w-3/5 order-1 lg:order-2 flex flex-col gap-8">
               <p className="text-sm lg:text-md text-gray-500 dark:text-gray-400 font-pressStart">
                 Category:{" "}
-                <span className="text-[var(--neon-cyan)]">
-                  {
-                    productTypes.find(
-                      (type) => type.id === form.state.values.category,
-                    )?.title
-                  }
-                </span>
+                <span className="text-[var(--neon-cyan)]">{category}</span>
               </p>
               {form.Field({
                 name: "name",
@@ -571,3 +562,10 @@ function RouteComponent() {
     </div>
   )
 }
+
+export const Route = createFileRoute("/new-edit")({
+  component: RouteComponent,
+  validateSearch: (search: Record<string, unknown>) => ({
+    category: typeof search.category === "string" ? search.category : undefined,
+  }),
+})
