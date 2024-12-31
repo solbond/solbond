@@ -148,6 +148,10 @@ function RouteComponent() {
     }
   }
 
+  const handleCoverUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // TODO: handle cover upload
+  }
+
   return (
     <div className="min-h-screen py-10">
       <div className="max-w-6xl mx-auto p-6">
@@ -317,194 +321,226 @@ function RouteComponent() {
                 Category:{" "}
                 <span className="text-[var(--neon-cyan)]">{category}</span>
               </p>
-              {form.Field({
-                name: "name",
-                children: (field) => (
-                  <div className="w-full">
-                    <Input
-                      type="text"
-                      placeholder="Product Name*"
-                      className="h-12 border-b placeholder:font-pressStart text-md lg:text-lg font-semibold border-b-gray-300 dark:border-b-gray-700 hover:opacity-100 transition-all duration-300"
-                      value={field.state.value}
-                      onChange={(e) => field.handleChange(e.target.value)}
-                    />
-                  </div>
-                ),
-              })}
-
-              {form.Field({
-                name: "description",
-                children: (field) => (
-                  <motion.div
-                    whileHover={{ scale: 1.005 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <label className="text-sm lg:text-md font-pressStart font-medium text-gray-700 dark:text-gray-300 mb-2 block">
-                      Description*
-                    </label>
-                    <div className="relative rounded-xl  overflow-visible">
-                      <MinimalTiptapEditor
-                        onValueChange={(value) => setDescription(value)}
-                        className="min-h-[200px] bg-inherit border-b border-b-gray-300 dark:border-b-gray-700 backdrop-blur-sm text-black dark:text-white"
+              <div className="flex flex-col gap-8">
+                {form.Field({
+                  name: "name",
+                  children: (field) => (
+                    <div className="w-full">
+                      <Input
+                        type="text"
+                        placeholder="Product Name*"
+                        className="h-12 border-b placeholder:font-pressStart text-md lg:text-lg font-semibold border-b-gray-300 dark:border-b-gray-700 hover:opacity-100 transition-all duration-300"
+                        value={field.state.value}
+                        onChange={(e) => field.handleChange(e.target.value)}
                       />
                     </div>
-                  </motion.div>
-                ),
-              })}
+                  ),
+                })}
 
-              {form.Field({
-                name: "documents",
-                children: (field) => (
+                <div className="flex flex-col">
+                  <label className="text-sm lg:text-md font-pressStart font-medium text-gray-700 dark:text-gray-300 mb-4">
+                    Cover
+                  </label>
                   <motion.div
-                    whileHover={{ scale: 1.005 }}
-                    transition={{ duration: 0.2 }}
+                    whileHover={{ borderColor: "var(--neon-cyan)" }}
+                    className={cn(
+                      "w-full border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-lg hover:bg-white/60 dark:hover:bg-black/30 transition-all duration-300 backdrop-blur-sm",
+                      "p-4 text-center",
+                    )}
                   >
-                    <label className="font-pressStart text-md font-medium text-gray-700 dark:text-gray-300 mb-2 block">
-                      Documents*
+                    <label className="cursor-pointer">
+                      <input
+                        type="file"
+                        className="hidden"
+                        accept="image/*,video/*"
+                        onChange={handleCoverUpload}
+                      />
+                      <div className="flex flex-col text-gray-500 dark:text-gray-400 items-center">
+                        <UploadIcon className="w-8 h-8 mb-2" />
+                        <p className="text-sm">Upload image</p>
+                      </div>
                     </label>
-                    <div
-                      className={cn(
-                        "grid gap-4",
-                        uploadedDocuments.length > 0
-                          ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-                          : "grid-cols-1",
-                      )}
-                    >
-                      {uploadedDocuments.map((doc, index) => (
-                        <div
-                          key={index}
-                          className="relative aspect-[3/2] rounded-lg overflow-hidden border-2 border-gray-300 dark:border-gray-700 p-4 backdrop-blur-sm"
-                        >
-                          <div className="flex flex-col items-center justify-center h-full gap-2">
-                            <div className="text-4xl">
-                              {getFileIcon(doc.name)}
-                            </div>
-                            <div className="w-full px-2">
-                              <p className="text-sm text-center text-gray-700 dark:text-gray-300 truncate max-w-full break-all">
-                                {doc.name.length > 20
-                                  ? doc.name.slice(0, 20) + "..."
-                                  : doc.name}
-                              </p>
-                            </div>
-                            <p className="text-xs text-gray-500">
-                              {formatFileSize(doc.size)}
-                            </p>
-                          </div>
-                          <button
-                            onClick={() => {
-                              const newDocs = uploadedDocuments.filter(
-                                (_, i) => i !== index,
-                              )
-                              setUploadedDocuments(newDocs)
-                              form.setFieldValue("documents", newDocs)
-                            }}
-                            className="absolute top-2 right-2 p-1.5 bg-black/50 rounded-full text-white hover:opacity-50 transition-all duration-300"
-                          >
-                            ×
-                          </button>
-                        </div>
-                      ))}
+                  </motion.div>
+                </div>
 
-                      <motion.div
-                        whileHover={{ borderColor: "var(--neon-cyan)" }}
+                {form.Field({
+                  name: "description",
+                  children: (field) => (
+                    <motion.div
+                      whileHover={{ scale: 1.005 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <label className="text-sm lg:text-md font-pressStart font-medium text-gray-700 dark:text-gray-300 mb-2 block">
+                        Description*
+                      </label>
+                      <div className="relative rounded-xl  overflow-visible">
+                        <MinimalTiptapEditor
+                          onValueChange={(value) => setDescription(value)}
+                          className="min-h-[200px] bg-inherit border-b border-b-gray-300 dark:border-b-gray-700 backdrop-blur-sm text-black dark:text-white"
+                        />
+                      </div>
+                    </motion.div>
+                  ),
+                })}
+
+                {form.Field({
+                  name: "documents",
+                  children: (field) => (
+                    <motion.div
+                      whileHover={{ scale: 1.005 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <label className="font-pressStart text-md font-medium text-gray-700 dark:text-gray-300 mb-2 block">
+                        Documents*
+                      </label>
+                      <div
                         className={cn(
-                          "flex items-center justify-center border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg hover:bg-white/60 dark:hover:bg-black/30 transition-all duration-300 backdrop-blur-sm",
-                          "aspect-[3/2]",
-                          uploadedDocuments.length === 0 ? "col-span-full" : "",
+                          "grid gap-4",
+                          uploadedDocuments.length > 0
+                            ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                            : "grid-cols-1",
                         )}
                       >
-                        <label className="flex flex-col items-center justify-center w-full h-full cursor-pointer">
-                          <div className="flex flex-col items-center justify-center p-4">
-                            <UploadIcon className="w-8 h-8 mb-2 text-gray-500 dark:text-gray-400" />
-                            <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
-                              Add Documents
-                            </p>
-                          </div>
-                          <input
-                            type="file"
-                            className="hidden"
-                            multiple
-                            onChange={uploadDocuments}
-                          />
-                        </label>
-                      </motion.div>
-                    </div>
-                  </motion.div>
-                ),
-              })}
-
-              {form.Field({
-                name: "image",
-                children: (field) => (
-                  <motion.div
-                    whileHover={{ scale: 1.005 }}
-                    transition={{ duration: 0.2 }}
-                    className="relative"
-                  >
-                    <label className="font-pressStart text-md font-medium text-gray-700 dark:text-gray-300 mb-2 block">
-                      Product Images
-                    </label>
-                    <div
-                      className={cn(
-                        "grid gap-4",
-                        uploadedImages.length > 0
-                          ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-                          : "grid-cols-1",
-                      )}
-                    >
-                      {uploadedImages.map((image, index) => (
-                        <div
-                          key={index}
-                          className="relative aspect-square rounded-lg overflow-hidden"
-                        >
-                          <img
-                            src={image}
-                            alt={`Upload ${index + 1}`}
-                            className="w-full h-full object-cover"
-                          />
-                          <button
-                            onClick={() =>
-                              setUploadedImages((prev) =>
-                                prev.filter((_, i) => i !== index),
-                              )
-                            }
-                            className="absolute top-2 right-2 px-2 bg-black/50 rounded-full text-white hover:opacity-50 transition-all duration-300"
+                        {uploadedDocuments.map((doc, index) => (
+                          <div
+                            key={index}
+                            className="relative aspect-[3/2] rounded-lg overflow-hidden border-2 border-gray-200 dark:border-gray-700 p-4 backdrop-blur-sm"
                           >
-                            ×
-                          </button>
-                        </div>
-                      ))}
-                      {uploadedImages.length < MAX_IMAGES && (
+                            <div className="flex flex-col items-center justify-center h-full gap-2">
+                              <div className="text-4xl">
+                                {getFileIcon(doc.name)}
+                              </div>
+                              <div className="w-full px-2">
+                                <p className="text-sm text-center text-gray-700 dark:text-gray-300 truncate max-w-full break-all">
+                                  {doc.name.length > 20
+                                    ? doc.name.slice(0, 20) + "..."
+                                    : doc.name}
+                                </p>
+                              </div>
+                              <p className="text-xs text-gray-500">
+                                {formatFileSize(doc.size)}
+                              </p>
+                            </div>
+                            <button
+                              onClick={() => {
+                                const newDocs = uploadedDocuments.filter(
+                                  (_, i) => i !== index,
+                                )
+                                setUploadedDocuments(newDocs)
+                                form.setFieldValue("documents", newDocs)
+                              }}
+                              className="absolute top-2 right-2 p-1.5 bg-black/50 rounded-full text-white hover:opacity-50 transition-all duration-300"
+                            >
+                              ×
+                            </button>
+                          </div>
+                        ))}
+
                         <motion.div
                           whileHover={{ borderColor: "var(--neon-cyan)" }}
                           className={cn(
                             "flex items-center justify-center border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg hover:bg-white/60 dark:hover:bg-black/30 transition-all duration-300 backdrop-blur-sm",
-                            "aspect-square md:aspect-[2/1]",
-                            uploadedImages.length === 0 ? "col-span-full" : "",
+                            "aspect-[3/2]",
+                            uploadedDocuments.length === 0
+                              ? "col-span-full"
+                              : "",
                           )}
                         >
                           <label className="flex flex-col items-center justify-center w-full h-full cursor-pointer">
                             <div className="flex flex-col items-center justify-center p-4">
                               <UploadIcon className="w-8 h-8 mb-2 text-gray-500 dark:text-gray-400" />
                               <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
-                                Add Image{" "}
-                                {uploadedImages.length > 0 &&
-                                  `(${uploadedImages.length}/${MAX_IMAGES})`}
+                                Add Documents
                               </p>
                             </div>
                             <input
                               type="file"
                               className="hidden"
-                              accept="image/*"
-                              onChange={handleFileUpload}
+                              multiple
+                              onChange={uploadDocuments}
                             />
                           </label>
                         </motion.div>
-                      )}
-                    </div>
-                  </motion.div>
-                ),
-              })}
+                      </div>
+                    </motion.div>
+                  ),
+                })}
+
+                {form.Field({
+                  name: "image",
+                  children: (field) => (
+                    <motion.div
+                      whileHover={{ scale: 1.005 }}
+                      transition={{ duration: 0.2 }}
+                      className="relative"
+                    >
+                      <label className="font-pressStart text-md font-medium text-gray-700 dark:text-gray-300 mb-2 block">
+                        Product Images
+                      </label>
+                      <div
+                        className={cn(
+                          "grid gap-4",
+                          uploadedImages.length > 0
+                            ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                            : "grid-cols-1",
+                        )}
+                      >
+                        {uploadedImages.map((image, index) => (
+                          <div
+                            key={index}
+                            className="relative aspect-square rounded-lg overflow-hidden"
+                          >
+                            <img
+                              src={image}
+                              alt={`Upload ${index + 1}`}
+                              className="w-full h-full object-cover"
+                            />
+                            <button
+                              onClick={() =>
+                                setUploadedImages((prev) =>
+                                  prev.filter((_, i) => i !== index),
+                                )
+                              }
+                              className="absolute top-2 right-2 px-2 bg-black/50 rounded-full text-white hover:opacity-50 transition-all duration-300"
+                            >
+                              ×
+                            </button>
+                          </div>
+                        ))}
+                        {uploadedImages.length < MAX_IMAGES && (
+                          <motion.div
+                            whileHover={{ borderColor: "var(--neon-cyan)" }}
+                            className={cn(
+                              "flex items-center justify-center border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg hover:bg-white/60 dark:hover:bg-black/30 transition-all duration-300 backdrop-blur-sm",
+                              "aspect-square md:aspect-[2/1]",
+                              uploadedImages.length === 0
+                                ? "col-span-full"
+                                : "",
+                            )}
+                          >
+                            <label className="flex flex-col items-center justify-center w-full h-full cursor-pointer">
+                              <div className="flex flex-col items-center justify-center p-4">
+                                <UploadIcon className="w-8 h-8 mb-2 text-gray-500 dark:text-gray-400" />
+                                <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+                                  Add Image{" "}
+                                  {uploadedImages.length > 0 &&
+                                    `(${uploadedImages.length}/${MAX_IMAGES})`}
+                                </p>
+                              </div>
+                              <input
+                                type="file"
+                                className="hidden"
+                                accept="image/*"
+                                onChange={handleFileUpload}
+                              />
+                            </label>
+                          </motion.div>
+                        )}
+                      </div>
+                    </motion.div>
+                  ),
+                })}
+              </div>
             </div>
 
             <div className="lg:w-1/5 order-2 lg:order-3 flex flex-col justify-start gap-3">
