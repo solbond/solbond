@@ -30,15 +30,16 @@ export interface ProductForm {
 }
 
 function RouteComponent() {
-  const [step, setStep] = useState<"type" | "customize">("type")
   const { category } = Route.useSearch()
   console.log(category, "category")
   const [description, setDescription] = useState("")
-  const [showPreview, setShowPreview] = useState(false)
+  // const [showPreview, setShowPreview] = useState(false)
   const { user } = useAuth()
   const [uploadedImages, setUploadedImages] = useState<string[]>([])
   const [inputTag, setInputTag] = useState("")
   const [uploadedDocuments, setUploadedDocuments] = useState<File[]>([])
+  const [allowCrypto, setAllowCrypto] = useState(false)
+  const [selectedCryptos, setSelectedCryptos] = useState<string[]>([])
 
   const navigate = useNavigate()
   const form = useForm({
@@ -58,16 +59,18 @@ function RouteComponent() {
   }, [category])
 
   const isFormValid = (values: ProductForm) => {
+    const isCryptoValid = !allowCrypto || selectedCryptos.length > 0
     return (
       values.name.trim() !== "" &&
       values.price > 0 &&
       values.category !== "" &&
-      values.documents.length > 0
+      values.documents.length > 0 &&
+      isCryptoValid
     )
   }
 
   const MAX_IMAGES = 4
-  const MAX_TAG_LENGTH = 15
+  const MAX_TAG_LENGTH = 18
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
@@ -147,7 +150,7 @@ function RouteComponent() {
 
   return (
     <div className="min-h-screen py-10">
-      <div className="max-w-5xl mx-auto p-6">
+      <div className="max-w-6xl mx-auto p-6">
         <motion.form
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -509,10 +512,13 @@ function RouteComponent() {
                 name: "price",
                 children: (field) => (
                   <div className="w-full">
+                    <label className="block text-sm uppercase font-pressStart mb-2">
+                      Pricing*
+                    </label>
                     <Input
                       type="text"
-                      placeholder="$price*"
-                      className="h-12 border-b uppercase text-lg font-pressStart border-b-gray-300 dark:border-b-gray-700 hover:opacity-100 transition-all duration-300"
+                      placeholder="$0"
+                      className="h-12 border-b uppercase text-lg font-pressStart border-b-gray-300 dark:border-b-gray-700 hover:opacity-100 transition-all duration-300 bg-transparent text-[var(--neon-cyan)]"
                       value={field.state.value ? `$${field.state.value}` : ""}
                       onChange={(e) => {
                         const value = e.target.value.replace(/^\$/, "")
@@ -521,6 +527,60 @@ function RouteComponent() {
                         }
                       }}
                     />
+                    <div className="flex items-start mt-4">
+                      <input
+                        type="checkbox"
+                        id="allowCrypto"
+                        className="appearance-none w-5 h-5 border-2 border-gray-300 dark:border-gray-700 bg-transparent checked:bg-[var(--neon-cyan)] checked:border-[var(--neon-cyan)] focus:outline-none transition-all duration-300 mr-2"
+                        onChange={(e) => setAllowCrypto(e.target.checked)}
+                      />
+
+                      <label
+                        htmlFor="allowCrypto"
+                        className="text-sm font-pressStart text-gray-700 dark:text-gray-300 cursor-pointer"
+                      >
+                        Allow customers to pay with crypto{" "}
+                        {allowCrypto && (
+                          <span className="text-sm text-[var(--neon-cyan)] font-mono">
+                            (at least 1 crypto required)
+                          </span>
+                        )}
+                      </label>
+                    </div>
+
+                    {allowCrypto && (
+                      <div className="mt-4">
+                        <div className="flex flex-col gap-2">
+                          {["Solana", "ETH", "USDT", "TON"].map((crypto) => (
+                            <label key={crypto} className="flex items-center">
+                              <input
+                                type="checkbox"
+                                name="cryptoOptions"
+                                value={crypto}
+                                className="appearance-none w-5 h-5 border-2 border-gray-300 dark:border-gray-700 bg-transparent checked:bg-[var(--neon-cyan)] checked:border-[var(--neon-cyan)] focus:outline-none transition-all duration-300 mr-2"
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setSelectedCryptos((prev) => [
+                                      ...prev,
+                                      crypto,
+                                    ])
+                                  } else {
+                                    setSelectedCryptos((prev) =>
+                                      prev.filter(
+                                        (selected) => selected !== crypto,
+                                      ),
+                                    )
+                                  }
+                                }}
+                              />
+                              <span className="text-sm font-pressStart text-gray-700 dark:text-gray-300">
+                                {crypto}
+                              </span>
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ),
               })}
