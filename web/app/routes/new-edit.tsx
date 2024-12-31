@@ -11,8 +11,7 @@ import { useAuth } from "~/context/FirebaseContext"
 import { cn } from "~/lib/utils"
 import { Badge } from "~/components/Badge"
 import { Tag } from "lucide-react"
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
-import { productTypes } from "~/constants/productTypes"
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd"
 import { useNavigate } from "@tanstack/react-router"
 import {
   suggestedTags,
@@ -68,6 +67,7 @@ function RouteComponent() {
   }
 
   const MAX_IMAGES = 4
+  const MAX_TAG_LENGTH = 15
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
@@ -88,7 +88,11 @@ function RouteComponent() {
   }
 
   const handleAddTag = (tag: string) => {
-    const normalizedTag = tag.toLowerCase().trim().replace(/\s+/g, "_")
+    const normalizedTag = tag
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, "_")
+      .slice(0, MAX_TAG_LENGTH)
     if (
       normalizedTag &&
       !form.state.values.tags.includes(normalizedTag) &&
@@ -98,6 +102,15 @@ function RouteComponent() {
       setInputTag("")
     }
   }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\s+/g, "_")
+    if (value.length <= MAX_TAG_LENGTH) {
+      setInputTag(value)
+    }
+  }
+
+  const tagLimitReached = inputTag.length >= MAX_TAG_LENGTH
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -113,15 +126,6 @@ function RouteComponent() {
     )
   }
 
-  const uploadDocuments = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files
-    if (files) {
-      const newDocuments = Array.from(files)
-      setUploadedDocuments((prev) => [...prev, ...newDocuments])
-      form.setFieldValue("documents", [...uploadedDocuments, ...newDocuments])
-    }
-  }
-
   const onDragEnd = (result: any) => {
     if (!result.destination) return
 
@@ -132,8 +136,14 @@ function RouteComponent() {
     form.setFieldValue("tags", newTags)
   }
 
-  console.log("Current category:", category)
-  console.log("Form category:", form.state.values.category)
+  const uploadDocuments = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+    if (files) {
+      const newDocuments = Array.from(files)
+      setUploadedDocuments((prev) => [...prev, ...newDocuments])
+      form.setFieldValue("documents", [...uploadedDocuments, ...newDocuments])
+    }
+  }
 
   return (
     <div className="min-h-screen py-10">
@@ -230,7 +240,7 @@ function RouteComponent() {
                                     <Tag className="w-4 h-4 text-black/70 dark:text-[var(--neon-cyan)]" />
                                     <Badge
                                       variant="selected"
-                                      className="flex items-center gap-2 font-mono text-sm"
+                                      className="flex items-center gap-2 font-mono text-sm overflow-hidden text-ellipsis whitespace-nowrap max-w-full"
                                     >
                                       {tag}
                                       <button
@@ -259,11 +269,14 @@ function RouteComponent() {
                           type="text"
                           placeholder="#add_tag"
                           value={inputTag}
-                          onChange={(e) =>
-                            setInputTag(e.target.value.replace(/\s+/g, "_"))
-                          }
+                          onChange={handleInputChange}
                           onKeyDown={handleKeyDown}
-                          className="relative text-center font-mono bg-transparent border-0 shadow-none placeholder:text-black/40 dark:placeholder:text-[var(--neon-cyan)] text-black dark:text-white px-4 py-3 transition-all duration-300 focus:shadow-[0_0_0_1px_var(--neon-cyan)] focus:bg-black/5 dark:focus:bg-white/5"
+                          className={cn(
+                            "relative text-center font-mono bg-transparent shadow-none placeholder:text-black/40 dark:placeholder:text-[var(--neon-cyan)] px-4 py-3 transition-all duration-300",
+                            tagLimitReached
+                              ? "border-2 border-red-500 text-red-500 shadow-[0_0_0_1px_red-500]"
+                              : "border-2 border-[var(--neon-cyan)] focus:shadow-[0_0_0_1px_var(--neon-cyan)] focus:bg-black/5 dark:focus:bg-white/5 text-black dark:text-white",
+                          )}
                         />
                         <div className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 border-r-2 border-t-2 border-[var(--neon-cyan)]/30" />
                         <div className="absolute left-3 bottom-3 w-4 h-4 border-l-2 border-b-2 border-[var(--neon-cyan)]/30" />
