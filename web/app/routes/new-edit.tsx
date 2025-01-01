@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router"
-import { UploadIcon, EyeIcon, ArrowRight, ArrowLeft } from "lucide-react"
+import { EyeIcon } from "lucide-react"
 import { MinimalTiptapEditor } from "~/components/minimal-tiptap"
 import { useForm } from "@tanstack/react-form"
 import { Button } from "~/components/ui/button"
@@ -13,6 +13,10 @@ import { Badge } from "~/components/Badge"
 import { Tag } from "lucide-react"
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd"
 import { useNavigate } from "@tanstack/react-router"
+import Arrow from "../../public/svg/arrow"
+import File from "../../public/svg/file"
+import Remove from "../../public/svg/remove"
+
 import {
   suggestedTags,
   getFileIcon,
@@ -173,7 +177,9 @@ function RouteComponent() {
                 onClick={() => navigate({ to: "/new" })}
                 className="flex flex-row items-center gap-2 bg-inherit mb-[2em] text-black dark:text-white opacity-70 hover:opacity-100 transition-opacity border-none"
               >
-                <ArrowLeft className="w-4 h-4" />
+                <div className="" style={{ transform: "rotate(270deg)" }}>
+                  <Arrow />
+                </div>
                 Back to Step 1
               </button>
 
@@ -319,7 +325,9 @@ function RouteComponent() {
             <div className="lg:w-3/5 order-1 lg:order-2 flex flex-col gap-8">
               <p className="text-sm lg:text-md text-gray-500 dark:text-gray-400 font-pressStart">
                 Category:{" "}
-                <span className="text-[var(--neon-cyan)]">{category}</span>
+                <span className="text-[var(--neon-cyan)] uppercase">
+                  {category}
+                </span>
               </p>
               <div className="flex flex-col gap-8">
                 {form.Field({
@@ -355,8 +363,8 @@ function RouteComponent() {
                         accept="image/*,video/*"
                         onChange={handleCoverUpload}
                       />
-                      <div className="flex flex-col text-gray-500 dark:text-gray-400 items-center">
-                        <UploadIcon className="w-8 h-8 mb-2" />
+                      <div className="flex flex-col text-gray-500 gap-2 dark:text-gray-400 items-center">
+                        <File />
                         <p className="text-sm">Upload image</p>
                       </div>
                     </label>
@@ -447,8 +455,8 @@ function RouteComponent() {
                           )}
                         >
                           <label className="flex flex-col items-center justify-center w-full h-full cursor-pointer">
-                            <div className="flex flex-col items-center justify-center p-4">
-                              <UploadIcon className="w-8 h-8 mb-2 text-gray-500 dark:text-gray-400" />
+                            <div className="flex flex-col items-center justify-center gap-2 p-4">
+                              <File />
                               <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
                                 Add Documents
                               </p>
@@ -501,9 +509,9 @@ function RouteComponent() {
                                   prev.filter((_, i) => i !== index),
                                 )
                               }
-                              className="absolute top-2 right-2 px-2 bg-black/50 rounded-full text-white hover:opacity-50 transition-all duration-300"
+                              className="dark:text-white text-[var(--neon-cyan)] hover:opacity-50 transition-all duration-300"
                             >
-                              ×
+                              <Remove />
                             </button>
                           </div>
                         ))}
@@ -519,8 +527,8 @@ function RouteComponent() {
                             )}
                           >
                             <label className="flex flex-col items-center justify-center w-full h-full cursor-pointer">
-                              <div className="flex flex-col items-center justify-center p-4">
-                                <UploadIcon className="w-8 h-8 mb-2 text-gray-500 dark:text-gray-400" />
+                              <div className="flex flex-col items-center justify-center gap-2 p-4">
+                                <File />
                                 <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
                                   Add Image{" "}
                                   {uploadedImages.length > 0 &&

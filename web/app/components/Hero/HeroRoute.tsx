@@ -1,5 +1,4 @@
 import {
-  ArrowRightIcon,
   SearchIcon,
   ShoppingBagIcon,
   ThumbsUpIcon,
@@ -12,6 +11,8 @@ import { signOut } from "firebase/auth"
 import { useAuth } from "~/context/FirebaseContext"
 import { auth } from "~/lib/firebase"
 import { useState, useEffect } from "react"
+import Follow from "../../../public/svg/follow"
+import Arrow from "../../../public/svg/arrow"
 
 const USERS = [
   {
@@ -195,7 +196,7 @@ export const HeroRoute = () => {
                     transition={{ duration: 0.3, delay: 0.3 }}
                     className="relative z-10"
                   >
-                    <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    <Arrow />
                   </motion.div>
                 </motion.div>
               ) : (
@@ -231,7 +232,9 @@ export const HeroRoute = () => {
                     transition={{ duration: 0.3, delay: 0.3 }}
                     className="relative z-10"
                   >
-                    <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    <div className="rotate-90">
+                      <Arrow />
+                    </div>
                   </motion.div>
                 </motion.div>
               )}
@@ -444,7 +447,7 @@ export const HeroRoute = () => {
                       className="text-[12px] px-3 h-7 font-medium rounded-lg
                        bg-inherit border hover:border-2 hover:border-emerald-700 dark:hover:border-[var(--neon-cyan)] transition-all"
                     >
-                      Follow
+                      <Follow />
                     </motion.button>
                   </div>
 

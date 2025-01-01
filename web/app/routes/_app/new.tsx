@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { ArrowRight } from "lucide-react"
 import { cn } from "~/lib/utils"
 import { TypingEffect } from "~/components/TypingEffect"
 import { useNavigate } from "@tanstack/react-router"
 import { productTypes } from "~/constants/productTypes"
+import Arrow from "../../../public/svg/arrow"
 
 export const Route = createFileRoute("/_app/new")({
   component: RouteComponent,
@@ -102,7 +102,9 @@ function RouteComponent() {
               className="mt-6 bg-[var(--neon-cyan)] dark:text-black text-white p-3 rounded-lg items-center justify-center flex gap-2 hover:bg-opacity-90 font-pressStart"
             >
               Go to Step 2
-              <ArrowRight className="w-4 h-4 ml-2" />
+              <div className="transform rotate-90">
+                <Arrow />
+              </div>
             </button>
           )}
         </div>
