@@ -44,6 +44,7 @@ function RouteComponent() {
   const [uploadedDocuments, setUploadedDocuments] = useState<File[]>([])
   const [allowCrypto, setAllowCrypto] = useState(false)
   const [selectedCryptos, setSelectedCryptos] = useState<string[]>([])
+  const [discount, setDiscount] = useState(false)
 
   const navigate = useNavigate()
   const form = useForm({
@@ -559,18 +560,49 @@ function RouteComponent() {
                     <label className="block text-sm uppercase font-pressStart mb-2">
                       Pricing*
                     </label>
-                    <Input
-                      type="text"
-                      placeholder="$0"
-                      className="h-12 border-b uppercase text-lg font-pressStart border-b-gray-300 dark:border-b-gray-700 hover:opacity-100 transition-all duration-300 bg-transparent text-[var(--neon-cyan)]"
-                      value={field.state.value ? `$${field.state.value}` : ""}
-                      onChange={(e) => {
-                        const value = e.target.value.replace(/^\$/, "")
-                        if (/^\d*\.?\d*$/.test(value)) {
-                          field.handleChange(Number(value))
+                    <div className="flex items-center mt-2">
+                      <Input
+                        type="text"
+                        placeholder="$0"
+                        className={cn(
+                          "w-24 h-12 uppercase text-lg font-pressStart border-none hover:opacity-100 transition-all duration-300 bg-transparent text-[var(--neon-cyan)]",
+                          discount &&
+                            "text-gray-500 dark:text-gray-400 line-through",
+                        )}
+                        value={
+                          form.state.values.price
+                            ? `$${form.state.values.price}`
+                            : ""
                         }
-                      }}
-                    />
+                        onChange={(e) => {
+                          const value = e.target.value.replace(/^\$/, "")
+                          if (/^\d*\.?\d*$/.test(value)) {
+                            form.setFieldValue("price", Number(value))
+                          }
+                        }}
+                      />
+                      {discount && (
+                        <div className=" text-md font-pressStart text-[var(--neon-cyan)]">
+                          ${form.state.values.price * 0.7}
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex items-start mt-4">
+                      <input
+                        type="checkbox"
+                        id="discount"
+                        className="appearance-none w-5 h-5 border-2 border-gray-300 dark:border-gray-700 bg-transparent checked:bg-[var(--neon-cyan)] checked:border-[var(--neon-cyan)] focus:outline-none transition-all duration-300 mr-2"
+                        onChange={(e) => setDiscount(e.target.checked)}
+                      />
+
+                      <label
+                        htmlFor="discount"
+                        className="text-sm font-mono text-gray-700 dark:text-gray-300 cursor-pointer"
+                      >
+                        Offer 30% discount to first 10 buyers
+                      </label>
+                    </div>
+
                     <div className="flex items-start mt-4">
                       <input
                         type="checkbox"
@@ -581,27 +613,25 @@ function RouteComponent() {
 
                       <label
                         htmlFor="allowCrypto"
-                        className="text-sm font-pressStart text-gray-700 dark:text-gray-300 cursor-pointer"
+                        className="text-sm font-mono text-gray-700 dark:text-gray-300 cursor-pointer"
                       >
                         Allow customers to pay with crypto{" "}
-                        {allowCrypto && (
-                          <span className="text-sm text-[var(--neon-cyan)] font-mono">
-                            (at least 1 crypto required)
-                          </span>
-                        )}
                       </label>
                     </div>
 
                     {allowCrypto && (
                       <div className="mt-4">
-                        <div className="flex flex-col gap-2">
-                          {["Solana", "ETH", "USDT", "TON"].map((crypto) => (
-                            <label key={crypto} className="flex items-center">
+                        <label className="text-sm mb-4 text-[var(--neon-cyan)] font-mono block">
+                          at least 1 crypto required
+                        </label>
+                        <div className="flex flex-wrap gap-2">
+                          {["SOL", "ETH", "TON", "USDT"].map((crypto) => (
+                            <div key={crypto} className="flex items-center">
                               <input
                                 type="checkbox"
-                                name="cryptoOptions"
-                                value={crypto}
+                                id={crypto}
                                 className="appearance-none w-5 h-5 border-2 border-gray-300 dark:border-gray-700 bg-transparent checked:bg-[var(--neon-cyan)] checked:border-[var(--neon-cyan)] focus:outline-none transition-all duration-300 mr-2"
+                                checked={selectedCryptos.includes(crypto)}
                                 onChange={(e) => {
                                   if (e.target.checked) {
                                     setSelectedCryptos((prev) => [
@@ -610,17 +640,18 @@ function RouteComponent() {
                                     ])
                                   } else {
                                     setSelectedCryptos((prev) =>
-                                      prev.filter(
-                                        (selected) => selected !== crypto,
-                                      ),
+                                      prev.filter((c) => c !== crypto),
                                     )
                                   }
                                 }}
                               />
-                              <span className="text-sm font-pressStart text-gray-700 dark:text-gray-300">
+                              <label
+                                htmlFor={crypto}
+                                className="text-sm font-pressStart text-gray-700 dark:text-gray-300 cursor-pointer"
+                              >
                                 {crypto}
-                              </span>
-                            </label>
+                              </label>
+                            </div>
                           ))}
                         </div>
                       </div>
