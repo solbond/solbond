@@ -388,9 +388,15 @@ function RouteComponent() {
                       <label className="text-sm lg:text-md font-pressStart font-medium text-gray-700 dark:text-gray-300 mb-2 block">
                         Description*
                       </label>
-                      <div className="relative rounded-xl  overflow-visible">
+                      <div className="relative rounded-xl overflow-visible">
                         <MinimalTiptapEditor
                           onValueChange={(value) => setDescription(value)}
+                          onFocus={(e) => {
+                            e.target.scrollIntoView({
+                              behavior: "smooth",
+                              block: "center",
+                            })
+                          }}
                           className="min-h-[200px] bg-inherit border-b border-b-gray-300 dark:border-b-gray-700 backdrop-blur-sm text-black dark:text-white"
                         />
                       </div>
