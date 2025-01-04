@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router"
+import { createFileRoute, createRoute } from "@tanstack/react-router"
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { SearchIcon, FilterIcon } from "lucide-react"
@@ -154,7 +154,7 @@ function RouteComponent() {
             {userData.products.map((product) => (
               <Link
                 key={product.id}
-                to={product.link}
+                to={`/product/${userData.id}/${product.id}`}
                 className="cyber-card bg-white dark:bg-black/40 backdrop-blur-sm rounded-xl overflow-hidden hover:scale-[1.02] transition-all cursor-pointer border border-gray-200 dark:border-gray-800"
               >
                 <div className="relative h-[200px] w-full">

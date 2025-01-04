@@ -5,74 +5,38 @@ import { Badge } from "~/components/Badge"
 import { cn } from "~/lib/utils"
 import { useState } from "react"
 import { Link } from "@tanstack/react-router"
-import { getFileIcon } from "~/constants/fileUtils"
 import { Input } from "~/components/ui/input"
-
-export interface ProductFile {
-  name: string
-  fileName: string
-  icon: string
-  quantity: number
-  description: string
-}
-
-export const productFiles: ProductFile[] = [
-  {
-    name: "UI Kit Design",
-    fileName: "ui-kit-design.json",
-    quantity: 1,
-    icon: getFileIcon("ui-kit-design.json"),
-    description: "Code for the UI Kit Design",
-  },
-  {
-    name: "Figma Template",
-    quantity: 1,
-    fileName: "figma-template.fig",
-    icon: getFileIcon("figma-template.fig"),
-    description:
-      "Figma Template for the UI Kit Design which is fully customizable",
-  },
-  {
-    name: "Design Guide",
-    quantity: 1,
-    fileName: "design-guide.pdf",
-    icon: getFileIcon("design-guide.pdf"),
-    description: "Design Guide for the UI Kit Design for design purposes",
-  },
-]
+import { useProfiles } from "~/context/ProfileContext"
 
 export const Route = createFileRoute("/_app/product")({
   component: RouteComponent,
+  parseParams: (params: Record<string, string>) => ({
+    profileId: params.profileId,
+    productId: params.productId,
+  }),
 })
 
 function RouteComponent() {
+  const { profileId, productId } = Route.useParams()
+  const { myProfile, otherProfiles } = useProfiles()
+
+  const profile =
+    profileId === myProfile.id
+      ? myProfile
+      : otherProfiles.find((p) => p.id === profileId)
+
+  if (!profile) {
+    return <div>Profile not found</div>
+  }
+
+  const product = profile.products.find((p) => p.id === parseInt(productId))
+
+  if (!product) {
+    return <div>Product not found</div>
+  }
+
   const [productQuantity, setProductQuantity] = useState(1)
-  const seller = {
-    name: "John Doe",
-    username: "johndoe",
-    profileImage: "https://api.multiavatar.com/JohnDoe.svg",
-    rating: 4.5,
-    numSold: 100,
-  }
-
-  const product = {
-    name: "Premium Figma UI Kit",
-    price: 100,
-    quantity: 1,
-    rating: 4.5,
-    description:
-      "A comprehensive UI kit containing over 1000+ components, perfectly organized and fully customizable. Includes dark mode, responsive layouts, and regular updates.",
-    tags: ["ui-kit", "figma", "design"],
-    mainImage: "https://robohash.org/nft-1484.png?set=set4&size=400x400",
-    images: [
-      "https://robohash.org/nft-1484.png?set=set4&size=400x400",
-      "https://robohash.org/nft-1485.png?set=set4&size=400x400",
-      "https://robohash.org/nft-1486.png?set=set4&size=400x400",
-      "https://robohash.org/nft-1487.png?set=set4&size=400x400",
-    ],
-  }
-
-  const [selectedImage, setSelectedImage] = useState(product.mainImage)
+  const [selectedImage, setSelectedImage] = useState(product.image)
   const [isInWishlist, setIsInWishlist] = useState(false)
 
   const handleShare = async () => {
@@ -93,6 +57,7 @@ function RouteComponent() {
       setProductQuantity(value)
     }
   }
+
   return (
     <div className="min-h-screen py-10">
       <div className="max-w-5xl mx-auto p-6">
@@ -120,29 +85,31 @@ function RouteComponent() {
               <div className="flex flex-col gap-3 mb-6">
                 <div className="text-sm flex flex-row items-center gap-1 text-gray-500">
                   <img
-                    src={seller.profileImage}
-                    alt={seller.username}
-                    className="w-4  rounded-full"
+                    src={profile.avatar}
+                    alt={profile.username}
+                    className="w-4 rounded-full"
                   />{" "}
                   by{" "}
                   <Link
                     to={"/profile"}
+                    search={{ id: profile.id }}
                     className="font-medium hover:text-white/90 transition-colors duration-300"
                   >
-                    @{seller.username}
+                    @{profile.username}
                   </Link>
                 </div>
 
                 <div className="flex flex-row items-center gap-2">
-                  {product.tags.map((tag) => (
-                    <Badge
-                      className="dark:bg-white/10 p-2 rounded-md bg-black/10"
-                      key={tag}
-                    >
-                      <Tag size={16} />
-                      {tag}
-                    </Badge>
-                  ))}
+                  {product.tags &&
+                    product.tags.map((tag) => (
+                      <Badge
+                        className="dark:bg-white/10 p-2 rounded-md bg-black/10"
+                        key={tag}
+                      >
+                        <Tag size={16} />
+                        {tag}
+                      </Badge>
+                    ))}
                 </div>
               </div>
               <p className="text-gray-600 dark:text-gray-300">
@@ -156,13 +123,13 @@ function RouteComponent() {
               </h2>
               <div className="flex flex-col sm:flex-row justify-between gap-4">
                 <div className="flex-1">
-                  {productFiles.map((file) => (
+                  {profile.products.map((file) => (
                     <div
-                      key={file.fileName}
+                      key={file.id}
                       className="flex items-center justify-between bg-inherit px-3 py-5 border-b border-gray-200 dark:border-gray-800"
                     >
                       <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
-                        <span className="text-3xl">{file.icon}</span>
+                        {/* <span className="text-3xl">{file.icon}</span> */}
                         <div className="flex flex-col hover:cursor-pointer gap-2">
                           <span className="font-semibold text-lg underline">
                             {file.name.toUpperCase()}

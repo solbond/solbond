@@ -4,9 +4,12 @@ export interface Product {
   id: number
   name: string
   price: number
+  description: string
   sold: boolean
   link?: string
   image: string
+  tags?: string[]
+  quantity?: number
 }
 
 export interface Profile {
@@ -55,6 +58,9 @@ const defaultOtherProfiles: Profile[] = [
         sold: false,
         link: "/product",
         image: "https://robohash.org/nft-1484.png?set=set4&size=400x400",
+        description: "A comprehensive UI kit for Figma.",
+        tags: ["ui-kit", "figma", "design"],
+        quantity: 1,
       },
     ],
   },
