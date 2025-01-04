@@ -7,6 +7,7 @@ import {
 import { AuthProvider } from "~/context/FirebaseContext"
 import { Nav } from "~/components/Nav/Nav"
 import { Suspense } from "react"
+import { ProfileProvider } from "~/context/ProfileContext"
 
 export const Route = createFileRoute("/_app")({
   component: LayoutComponent,
@@ -23,8 +24,10 @@ function LayoutComponent() {
       }
     >
       <AuthProvider>
-        {location.pathname === "/auth" ? null : <Nav />}
-        <Outlet />
+        <ProfileProvider>
+          {location.pathname === "/auth" ? null : <Nav />}
+          <Outlet />
+        </ProfileProvider>
       </AuthProvider>
     </Suspense>
   )

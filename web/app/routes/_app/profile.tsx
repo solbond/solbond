@@ -7,43 +7,26 @@ import { Link } from "@tanstack/react-router"
 import {
   ChevronRightIcon,
   StarIcon,
-  ChevronLeftIcon,
   ThumbsUpIcon,
   MessageCircle,
 } from "lucide-react"
 import { Badge } from "~/components/Badge"
+import { useProfiles } from "~/context/ProfileContext"
 
 export const Route = createFileRoute("/_app/profile")({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const [userData, setUserData] = useState({
-    username: "JohnD",
-    name: "John Doe",
-    email: "john.doe@example.com",
-    rating: 4.5,
-    avatar: "https://api.multiavatar.com/JohnDoe.svg",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
-    products: [
-      {
-        id: 1,
-        name: "Premium Figma UI Kit",
-        price: 100,
-        sold: false,
-        link: "/product",
-        image: "https://robohash.org/nft-1484.png?set=set4&size=400x400",
-      },
-      {
-        id: 2,
-        name: "Ai Image Generator",
-        price: 200,
-        sold: true,
-        image: "https://robohash.org/nft-1999.png?set=set4&size=400x400",
-      },
-    ],
-  })
+  const { id } = Route.useSearch()
+  const { myProfile, otherProfiles } = useProfiles()
+
+  const profile =
+    id === myProfile.id
+      ? myProfile
+      : otherProfiles.find((p) => p.id === id) || myProfile
+
+  const [userData, setUserData] = useState(profile)
 
   const [openFilter, setOpenFilter] = useState<string | null>(null)
 

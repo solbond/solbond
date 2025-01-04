@@ -13,6 +13,8 @@ import { auth } from "~/lib/firebase"
 import { useState, useEffect } from "react"
 import Follow from "../../../public/svg/follow"
 import Arrow from "../../../public/svg/arrow"
+import { useProfiles } from "~/context/ProfileContext"
+import { Link } from "@tanstack/react-router"
 
 const USERS = [
   {
@@ -81,6 +83,8 @@ export const HeroRoute = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isExiting, setIsExiting] = useState(false)
   const [windowWidth, setWindowWidth] = useState(0)
+  const { otherProfiles } = useProfiles()
+  const johnDoe = otherProfiles[0] // John Doe's profile
 
   useEffect(() => {
     setWindowWidth(window.innerWidth)
@@ -413,17 +417,19 @@ export const HeroRoute = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {USERS.map((user, index) => (
-            <div
+          {[johnDoe].map((profile, index) => (
+            <Link
               key={index}
+              to="/profile"
+              search={{ id: profile.id }}
               className="group overflow-hidden rounded-2xl hover:scale-[1.02] transition-all duration-300 cyber-card"
             >
               <div className="flex gap-4 p-4">
                 <div className="relative">
                   <div className="w-[64px] h-[64px] rounded-xl overflow-hidden">
                     <img
-                      src={user.image}
-                      alt={`${user.name}'s profile`}
+                      src={profile.avatar}
+                      alt={`${profile.name}'s profile`}
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -433,7 +439,7 @@ export const HeroRoute = () => {
                   <div className="flex items-start justify-between">
                     <div>
                       <h2 className="text-[16px] font-normal text-gray-900 dark:text-gray-100">
-                        {user.name}
+                        {profile.name}
                       </h2>
                       <p className="text-[12px] dark:text-[var(--neon-yellow)] text-gray-400">
                         Digital creator
@@ -460,7 +466,7 @@ export const HeroRoute = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

@@ -7,11 +7,13 @@ import { auth } from "~/lib/firebase"
 import { ArrowRightIcon } from "lucide-react"
 import { useEffect, useState } from "react"
 import { Link } from "@tanstack/react-router"
+import { useProfiles } from "~/context/ProfileContext"
 
 export const Nav = () => {
   const router = useRouter()
   const { user } = useAuth()
   const [isScrolled, setIsScrolled] = useState(false)
+  const { myProfile } = useProfiles()
 
   const isHomeRoute = router.state.location.pathname === "/"
 
@@ -55,7 +57,11 @@ export const Nav = () => {
             whileHover={{ y: -2 }}
             className="flex items-center gap-2 text-emerald-800 dark:text-[var(--neon-cyan)] opacity-70 hover:opacity-100 transition-opacity"
           >
-            <Link className="flex items-center gap-2" to="/profile">
+            <Link
+              className="flex items-center gap-2"
+              to="/profile"
+              search={{ id: myProfile.id }}
+            >
               <UserIcon size={18} />
               <span className="text-sm">Profile</span>
             </Link>
