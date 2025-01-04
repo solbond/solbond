@@ -83,17 +83,14 @@ export const HeroRoute = () => {
   const [windowWidth, setWindowWidth] = useState(0)
 
   useEffect(() => {
-    // Set initial width
     setWindowWidth(window.innerWidth)
 
-    // Add resize listener
     const handleResize = () => {
       setWindowWidth(window.innerWidth)
     }
 
     window.addEventListener("resize", handleResize)
 
-    // Cleanup
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 

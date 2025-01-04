@@ -176,7 +176,7 @@ function RouteComponent() {
                 type="button"
                 // onClick={() => setStep("type")}
                 onClick={() => navigate({ to: "/new" })}
-                className="flex flex-row items-center gap-2 bg-inherit mb-[2em] text-black dark:text-white opacity-70 hover:opacity-100 transition-opacity border-none"
+                className="flex flex-row items-center gap-10 md:gap-2 bg-inherit mb-[2em] text-black dark:text-white opacity-70 hover:opacity-100 transition-opacity border-none"
               >
                 <div className="" style={{ transform: "rotate(270deg)" }}>
                   <Arrow />
@@ -281,10 +281,16 @@ function RouteComponent() {
                         <div className="absolute inset-0 border border-[var(--neon-cyan)]/20 transition-colors duration-300 group-hover:border-[var(--neon-cyan)]" />
                         <Input
                           type="text"
-                          placeholder="#add_tag"
+                          placeholder="#add tag"
                           value={inputTag}
                           onChange={handleInputChange}
                           onKeyDown={handleKeyDown}
+                          onFocus={(e) => {
+                            e.target.scrollIntoView({
+                              behavior: "smooth",
+                              block: "center",
+                            })
+                          }}
                           className={cn(
                             "relative text-center font-mono bg-transparent shadow-none placeholder:text-black/40 dark:placeholder:text-[var(--neon-cyan)] px-4 py-3 transition-all duration-300",
                             tagLimitReached
@@ -664,7 +670,7 @@ function RouteComponent() {
                 type="submit"
                 disabled={!isFormValid(form.state.values)}
                 className={cn(
-                  "w-full font-pressStart relative overflow-hidden",
+                  "w-full mt-6 font-pressStart relative overflow-hidden",
                   "bg-gradient-to-r from-[var(--neon-cyan)] to-[var(--neon-cyan)]",
                   "text-white dark:text-black border border-[var(--neon-cyan)]",
                   "transition-all duration-300",
