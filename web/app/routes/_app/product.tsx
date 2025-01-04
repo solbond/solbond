@@ -46,6 +46,7 @@ export const Route = createFileRoute("/_app/product")({
 })
 
 function RouteComponent() {
+  const [productQuantity, setProductQuantity] = useState(1)
   const seller = {
     name: "John Doe",
     username: "johndoe",
@@ -86,6 +87,12 @@ function RouteComponent() {
     }
   }
 
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value)
+    if (value >= 1) {
+      setProductQuantity(value)
+    }
+  }
   return (
     <div className="min-h-screen py-10">
       <div className="max-w-5xl mx-auto p-6">
@@ -110,13 +117,13 @@ function RouteComponent() {
                   ${product.price}
                 </span>
               </div>
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-3 mb-6">
                 <div className="text-sm flex flex-row items-center gap-1 text-gray-500">
                   <img
                     src={seller.profileImage}
                     alt={seller.username}
                     className="w-4  rounded-full"
-                  />
+                  />{" "}
                   by{" "}
                   <Link
                     to={"/profile"}
@@ -124,6 +131,18 @@ function RouteComponent() {
                   >
                     @{seller.username}
                   </Link>
+                </div>
+
+                <div className="flex flex-row items-center gap-2">
+                  {product.tags.map((tag) => (
+                    <Badge
+                      className="dark:bg-white/10 p-2 rounded-md bg-black/10"
+                      key={tag}
+                    >
+                      <Tag size={16} />
+                      {tag}
+                    </Badge>
+                  ))}
                 </div>
               </div>
               <p className="text-gray-600 dark:text-gray-300">
@@ -144,7 +163,7 @@ function RouteComponent() {
                     >
                       <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
                         <span className="text-3xl">{file.icon}</span>
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col hover:cursor-pointer gap-2">
                           <span className="font-semibold text-lg underline">
                             {file.name.toUpperCase()}
                           </span>
@@ -167,10 +186,8 @@ function RouteComponent() {
                     <span className="text-lg font-bold">Quantity:</span>
                     <Input
                       type="number"
-                      value={product.quantity}
-                      onChange={(e) =>
-                        setProductQuantity(Number(e.target.value))
-                      }
+                      value={productQuantity}
+                      onChange={(e) => handleQuantityChange(e)}
                     />
                   </div>
                   <motion.button
