@@ -8,12 +8,10 @@ import { Link } from "@tanstack/react-router"
 import { Input } from "~/components/ui/input"
 import { useProfiles } from "~/context/ProfileContext"
 
-export const Route = createFileRoute("/_app/product")({
+export const Route = createFileRoute(
+  "/_app/profile/:profileId/product/:productId",
+)({
   component: RouteComponent,
-  parseParams: (params: Record<string, string>) => ({
-    profileId: params.profileId,
-    productId: params.productId,
-  }),
 })
 
 function RouteComponent() {

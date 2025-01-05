@@ -1,19 +1,18 @@
-import { createFileRoute, createRoute } from "@tanstack/react-router"
+import { createFileRoute } from "@tanstack/react-router"
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { SearchIcon, FilterIcon } from "lucide-react"
 import { Link } from "@tanstack/react-router"
-
+import { useProfiles } from "~/context/ProfileContext"
+import { Badge } from "~/components/Badge"
 import {
   ChevronRightIcon,
   StarIcon,
   ThumbsUpIcon,
   MessageCircle,
 } from "lucide-react"
-import { Badge } from "~/components/Badge"
-import { useProfiles } from "~/context/ProfileContext"
 
-export const Route = createFileRoute("/_app/profile")({
+export const Route = createFileRoute("/_app/profile/")({
   component: RouteComponent,
 })
 
@@ -154,7 +153,7 @@ function RouteComponent() {
             {userData.products.map((product) => (
               <Link
                 key={product.id}
-                to={`/product/${userData.id}/${product.id}`}
+                to={`/profile/${userData.id}/product/${product.id}`}
                 className="cyber-card bg-white dark:bg-black/40 backdrop-blur-sm rounded-xl overflow-hidden hover:scale-[1.02] transition-all cursor-pointer border border-gray-200 dark:border-gray-800"
               >
                 <div className="relative h-[200px] w-full">

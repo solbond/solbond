@@ -14,10 +14,12 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as NewEditImport } from './routes/new-edit'
 import { Route as AppRouteImport } from './routes/_app/route'
 import { Route as AppIndexImport } from './routes/_app/index'
-import { Route as AppProfileImport } from './routes/_app/profile'
-import { Route as AppProductImport } from './routes/_app/product'
 import { Route as AppNewImport } from './routes/_app/new'
 import { Route as AppAuthImport } from './routes/_app/auth'
+import { Route as AppProfileIndexImport } from './routes/_app/profile/index'
+import { Route as AppProfileNewImport } from './routes/_app/profile/new'
+import { Route as AppProfileAuthImport } from './routes/_app/profile/auth'
+import { Route as AppProfileprofileIdProductproductIdImport } from './routes/_app/profile/:profileId/product/:productId'
 
 // Create/Update Routes
 
@@ -38,18 +40,6 @@ const AppIndexRoute = AppIndexImport.update({
   getParentRoute: () => AppRouteRoute,
 } as any)
 
-const AppProfileRoute = AppProfileImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => AppRouteRoute,
-} as any)
-
-const AppProductRoute = AppProductImport.update({
-  id: '/product',
-  path: '/product',
-  getParentRoute: () => AppRouteRoute,
-} as any)
-
 const AppNewRoute = AppNewImport.update({
   id: '/new',
   path: '/new',
@@ -61,6 +51,31 @@ const AppAuthRoute = AppAuthImport.update({
   path: '/auth',
   getParentRoute: () => AppRouteRoute,
 } as any)
+
+const AppProfileIndexRoute = AppProfileIndexImport.update({
+  id: '/profile/',
+  path: '/profile/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+
+const AppProfileNewRoute = AppProfileNewImport.update({
+  id: '/profile/new',
+  path: '/profile/new',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+
+const AppProfileAuthRoute = AppProfileAuthImport.update({
+  id: '/profile/auth',
+  path: '/profile/auth',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+
+const AppProfileprofileIdProductproductIdRoute =
+  AppProfileprofileIdProductproductIdImport.update({
+    id: '/profile/:profileId/product/:productId',
+    path: '/profile/:profileId/product/:productId',
+    getParentRoute: () => AppRouteRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -94,25 +109,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppNewImport
       parentRoute: typeof AppRouteImport
     }
-    '/_app/product': {
-      id: '/_app/product'
-      path: '/product'
-      fullPath: '/product'
-      preLoaderRoute: typeof AppProductImport
-      parentRoute: typeof AppRouteImport
-    }
-    '/_app/profile': {
-      id: '/_app/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof AppProfileImport
-      parentRoute: typeof AppRouteImport
-    }
     '/_app/': {
       id: '/_app/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AppIndexImport
+      parentRoute: typeof AppRouteImport
+    }
+    '/_app/profile/auth': {
+      id: '/_app/profile/auth'
+      path: '/profile/auth'
+      fullPath: '/profile/auth'
+      preLoaderRoute: typeof AppProfileAuthImport
+      parentRoute: typeof AppRouteImport
+    }
+    '/_app/profile/new': {
+      id: '/_app/profile/new'
+      path: '/profile/new'
+      fullPath: '/profile/new'
+      preLoaderRoute: typeof AppProfileNewImport
+      parentRoute: typeof AppRouteImport
+    }
+    '/_app/profile/': {
+      id: '/_app/profile/'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AppProfileIndexImport
+      parentRoute: typeof AppRouteImport
+    }
+    '/_app/profile/:profileId/product/:productId': {
+      id: '/_app/profile/:profileId/product/:productId'
+      path: '/profile/:profileId/product/:productId'
+      fullPath: '/profile/:profileId/product/:productId'
+      preLoaderRoute: typeof AppProfileprofileIdProductproductIdImport
       parentRoute: typeof AppRouteImport
     }
   }
@@ -123,17 +152,22 @@ declare module '@tanstack/react-router' {
 interface AppRouteRouteChildren {
   AppAuthRoute: typeof AppAuthRoute
   AppNewRoute: typeof AppNewRoute
-  AppProductRoute: typeof AppProductRoute
-  AppProfileRoute: typeof AppProfileRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppProfileAuthRoute: typeof AppProfileAuthRoute
+  AppProfileNewRoute: typeof AppProfileNewRoute
+  AppProfileIndexRoute: typeof AppProfileIndexRoute
+  AppProfileprofileIdProductproductIdRoute: typeof AppProfileprofileIdProductproductIdRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppAuthRoute: AppAuthRoute,
   AppNewRoute: AppNewRoute,
-  AppProductRoute: AppProductRoute,
-  AppProfileRoute: AppProfileRoute,
   AppIndexRoute: AppIndexRoute,
+  AppProfileAuthRoute: AppProfileAuthRoute,
+  AppProfileNewRoute: AppProfileNewRoute,
+  AppProfileIndexRoute: AppProfileIndexRoute,
+  AppProfileprofileIdProductproductIdRoute:
+    AppProfileprofileIdProductproductIdRoute,
 }
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
@@ -145,18 +179,22 @@ export interface FileRoutesByFullPath {
   '/new-edit': typeof NewEditRoute
   '/auth': typeof AppAuthRoute
   '/new': typeof AppNewRoute
-  '/product': typeof AppProductRoute
-  '/profile': typeof AppProfileRoute
   '/': typeof AppIndexRoute
+  '/profile/auth': typeof AppProfileAuthRoute
+  '/profile/new': typeof AppProfileNewRoute
+  '/profile': typeof AppProfileIndexRoute
+  '/profile/:profileId/product/:productId': typeof AppProfileprofileIdProductproductIdRoute
 }
 
 export interface FileRoutesByTo {
   '/new-edit': typeof NewEditRoute
   '/auth': typeof AppAuthRoute
   '/new': typeof AppNewRoute
-  '/product': typeof AppProductRoute
-  '/profile': typeof AppProfileRoute
   '/': typeof AppIndexRoute
+  '/profile/auth': typeof AppProfileAuthRoute
+  '/profile/new': typeof AppProfileNewRoute
+  '/profile': typeof AppProfileIndexRoute
+  '/profile/:profileId/product/:productId': typeof AppProfileprofileIdProductproductIdRoute
 }
 
 export interface FileRoutesById {
@@ -165,25 +203,46 @@ export interface FileRoutesById {
   '/new-edit': typeof NewEditRoute
   '/_app/auth': typeof AppAuthRoute
   '/_app/new': typeof AppNewRoute
-  '/_app/product': typeof AppProductRoute
-  '/_app/profile': typeof AppProfileRoute
   '/_app/': typeof AppIndexRoute
+  '/_app/profile/auth': typeof AppProfileAuthRoute
+  '/_app/profile/new': typeof AppProfileNewRoute
+  '/_app/profile/': typeof AppProfileIndexRoute
+  '/_app/profile/:profileId/product/:productId': typeof AppProfileprofileIdProductproductIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/new-edit' | '/auth' | '/new' | '/product' | '/profile' | '/'
+  fullPaths:
+    | ''
+    | '/new-edit'
+    | '/auth'
+    | '/new'
+    | '/'
+    | '/profile/auth'
+    | '/profile/new'
+    | '/profile'
+    | '/profile/:profileId/product/:productId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/new-edit' | '/auth' | '/new' | '/product' | '/profile' | '/'
+  to:
+    | '/new-edit'
+    | '/auth'
+    | '/new'
+    | '/'
+    | '/profile/auth'
+    | '/profile/new'
+    | '/profile'
+    | '/profile/:profileId/product/:productId'
   id:
     | '__root__'
     | '/_app'
     | '/new-edit'
     | '/_app/auth'
     | '/_app/new'
-    | '/_app/product'
-    | '/_app/profile'
     | '/_app/'
+    | '/_app/profile/auth'
+    | '/_app/profile/new'
+    | '/_app/profile/'
+    | '/_app/profile/:profileId/product/:productId'
   fileRoutesById: FileRoutesById
 }
 
@@ -216,9 +275,11 @@ export const routeTree = rootRoute
       "children": [
         "/_app/auth",
         "/_app/new",
-        "/_app/product",
-        "/_app/profile",
-        "/_app/"
+        "/_app/",
+        "/_app/profile/auth",
+        "/_app/profile/new",
+        "/_app/profile/",
+        "/_app/profile/:profileId/product/:productId"
       ]
     },
     "/new-edit": {
@@ -232,16 +293,24 @@ export const routeTree = rootRoute
       "filePath": "_app/new.tsx",
       "parent": "/_app"
     },
-    "/_app/product": {
-      "filePath": "_app/product.tsx",
-      "parent": "/_app"
-    },
-    "/_app/profile": {
-      "filePath": "_app/profile.tsx",
-      "parent": "/_app"
-    },
     "/_app/": {
       "filePath": "_app/index.tsx",
+      "parent": "/_app"
+    },
+    "/_app/profile/auth": {
+      "filePath": "_app/profile/auth.tsx",
+      "parent": "/_app"
+    },
+    "/_app/profile/new": {
+      "filePath": "_app/profile/new.tsx",
+      "parent": "/_app"
+    },
+    "/_app/profile/": {
+      "filePath": "_app/profile/index.tsx",
+      "parent": "/_app"
+    },
+    "/_app/profile/:profileId/product/:productId": {
+      "filePath": "_app/profile/:profileId/product/:productId.tsx",
       "parent": "/_app"
     }
   }
