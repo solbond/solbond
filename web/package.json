@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vinxi dev",
     "build": "vinxi build",
-    "start": "vinxi start"
+    "start": "vinxi start",
+    "s": "bun --watch scripts/run.ts"
   },
   "dependencies": {
     "@clerk/tanstack-start": "^0.8.6",
