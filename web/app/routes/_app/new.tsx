@@ -7,10 +7,6 @@ import { useNavigate } from "@tanstack/react-router"
 import { productTypes } from "~/constants/productTypes"
 import Arrow from "../../../public/svg/arrow"
 
-export const Route = createFileRoute("/_app/new")({
-  component: RouteComponent,
-})
-
 function RouteComponent() {
   const [category, setCategory] = useState<string>("")
   const navigate = useNavigate()
@@ -112,3 +108,7 @@ function RouteComponent() {
     </div>
   )
 }
+
+export const Route = createFileRoute("/_app/new")({
+  component: RouteComponent,
+})

@@ -1,3 +1,4 @@
+// TODO: replace with clerk
 import { initializeApp } from "firebase/app"
 import { getAuth } from "firebase/auth"
 
