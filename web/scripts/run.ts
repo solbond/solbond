@@ -1,14 +1,19 @@
 import ronin from "ronin"
 import * as models from "../schema/index"
-const { add } = ronin({ models })
+const { add, get } = ronin({ models })
 
 async function main() {
-  const res = await add.user.to({
+  // const res = await add.user.to({
+  //   email: "nikita@nikiv.de",
+  //   clerkId: "user_2Q567890123456789012345",
+  //   username: "nikiv",
+  // })
+  const users = await get.users()
+  console.log(users)
+  const user = await get.user.with({
     email: "nikita@nikiv.dev",
-    clerkId: "user_2Q5678901234567890123456",
-    username: "nikiv",
   })
-  console.log(res)
+  console.log(user)
 }
 
 main()
