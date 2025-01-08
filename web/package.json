@@ -9,6 +9,7 @@
     "start": "vinxi start"
   },
   "dependencies": {
+    "@clerk/tanstack-start": "^0.8.6",
     "@firebase/auth": "^1.8.1",
     "@hello-pangea/dnd": "^17.0.0",
     "@radix-ui/react-dialog": "^1.1.4",

@@ -18,6 +18,7 @@ function LayoutComponent() {
         </div>
       }
     >
+      {/* TODO: old firebase auth, del it */}
       {/* <AuthProvider> */}
       <ProfileProvider>
         {location.pathname === "/auth" ? null : <Nav />}

@@ -12,6 +12,7 @@ import { Fonts } from "~/components/Fonts"
 import { NotFound } from "~/components/NotFound"
 import { seo } from "~/lib/seo"
 import appCss from "~/styles/app.css?url"
+import { ClerkProvider } from "@clerk/tanstack-start"
 
 function RootComponent() {
   return (
@@ -88,7 +89,9 @@ export const Route = createRootRouteWithContext<{
   errorComponent: (props) => {
     return (
       <RootDocument>
-        <DefaultCatchBoundary {...props} />
+        <ClerkProvider>
+          <DefaultCatchBoundary {...props} />
+        </ClerkProvider>
       </RootDocument>
     )
   },
