@@ -4,6 +4,7 @@ export const UserModel = model({
   slug: "user",
   fields: {
     email: string({ unique: true }),
+    clerkId: string({ unique: true }),
     username: string(),
   },
 })
