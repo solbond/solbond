@@ -1,20 +1,19 @@
+import { useRouter } from "@tanstack/react-router"
+import { motion } from "framer-motion"
 import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
   SearchIcon,
   ShoppingBagIcon,
   ThumbsUpIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
 } from "lucide-react"
-import { animate, motion } from "framer-motion"
-import { useRouter } from "@tanstack/react-router"
 // import { signOut } from "firebase/auth"
 // import { useAuth } from "~/context/FirebaseContext"
-import { auth } from "~/lib/firebase"
-import { useState, useEffect } from "react"
-import Follow from "../../../public/svg/follow"
-import Arrow from "../../../public/svg/arrow"
-import { useProfiles } from "~/context/ProfileContext"
 import { Link } from "@tanstack/react-router"
+import { useEffect, useState } from "react"
+import { useProfiles } from "~/context/ProfileContext"
+import Arrow from "../../../public/svg/arrow"
+import Follow from "../../../public/svg/follow"
 
 const USERS = [
   {

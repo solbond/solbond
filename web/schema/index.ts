@@ -3,8 +3,11 @@ import { link, model, string } from "ronin/schema"
 export const UserModel = model({
   slug: "user",
   fields: {
-    email: string({ unique: true }),
-    clerkId: string({ unique: true }),
+    email: string(),
+    clerkId: string(),
+    // TODO: add back
+    // email: string({ unique: true }),
+    // clerkId: string({ unique: true }),
     username: string(),
   },
 })
