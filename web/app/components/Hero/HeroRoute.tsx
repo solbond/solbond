@@ -7,8 +7,8 @@ import {
 } from "lucide-react"
 import { animate, motion } from "framer-motion"
 import { useRouter } from "@tanstack/react-router"
-import { signOut } from "firebase/auth"
-import { useAuth } from "~/context/FirebaseContext"
+// import { signOut } from "firebase/auth"
+// import { useAuth } from "~/context/FirebaseContext"
 import { auth } from "~/lib/firebase"
 import { useState, useEffect } from "react"
 import Follow from "../../../public/svg/follow"
@@ -79,7 +79,7 @@ const CATEGORIES = [
 
 export const HeroRoute = () => {
   const router = useRouter()
-  const { user } = useAuth()
+  // const { user } = useAuth()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isExiting, setIsExiting] = useState(false)
   const [windowWidth, setWindowWidth] = useState(0)
@@ -166,11 +166,12 @@ export const HeroRoute = () => {
           <div className="flex items-center justify-center gap-3 mt-4">
             <motion.button
               whileHover={{ scale: 1.05 }}
-              onClick={() =>
-                user ? signOut(auth) : router.navigate({ to: "/auth" })
-              }
+              // onClick={() =>
+              //   user ? signOut(auth) : router.navigate({ to: "/auth" })
+              // }
             >
-              {user ? (
+              {/* {user ? ( */}
+              {true ? (
                 <motion.div
                   initial={{ width: "36px", scale: 0 }}
                   animate={{ width: "140px", scale: 1 }}

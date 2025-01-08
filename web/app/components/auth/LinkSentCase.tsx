@@ -1,7 +1,7 @@
-import { User, reload } from "firebase/auth"
+// import { User, reload } from "firebase/auth"
 import { useEffect, useState } from "react"
-import { $verifyUser } from "~/actions/actions"
-import { useAuth } from "~/context/FirebaseContext"
+// import { $verifyUser } from "~/actions/actions"
+// import { useAuth } from "~/context/FirebaseContext"
 
 export default function LinkSentCase({
   currentCase,
@@ -12,38 +12,38 @@ export default function LinkSentCase({
     currentCase: "signup" | "login" | "link-sent" | "verified",
   ) => void
 }) {
-  const { user } = useAuth()
+  // const { user } = useAuth()
   const [checking, setChecking] = useState(false)
 
-  useEffect(() => {
-    if (!user) return
+  // useEffect(() => {
+  //   // if (!user) return
 
-    const checkEmailVerification = async () => {
-      if (checking) return
-      setChecking(true)
+  //   const checkEmailVerification = async () => {
+  //     if (checking) return
+  //     setChecking(true)
 
-      try {
-        await reload(user)
-        if (user.emailVerified) {
-          await $verifyUser({
-            data: user.email as string,
-          })
-          console.log(user, "user")
-          setCurrentCase("verified")
-        }
-      } catch (error) {
-        console.error("Error checking email verification:", error)
-      } finally {
-        setChecking(false)
-      }
-    }
+  //     try {
+  //       // await reload(user)
+  //       // if (user.emailVerified) {
+  //       //   await $verifyUser({
+  //       //     data: user.email as string,
+  //       //   })
+  //       //   console.log(user, "user")
+  //       //   setCurrentCase("verified")
+  //       // }
+  //     } catch (error) {
+  //       console.error("Error checking email verification:", error)
+  //     } finally {
+  //       setChecking(false)
+  //     }
+  //   }
 
-    checkEmailVerification()
+  //   checkEmailVerification()
 
-    const interval = setInterval(checkEmailVerification, 3000)
+  //   const interval = setInterval(checkEmailVerification, 3000)
 
-    return () => clearInterval(interval)
-  }, [user, checking, setCurrentCase])
+  //   return () => clearInterval(interval)
+  // }, [user, checking, setCurrentCase])
 
   return (
     <div className="flex flex-col">

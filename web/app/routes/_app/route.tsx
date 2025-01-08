@@ -1,12 +1,7 @@
-import {
-  Outlet,
-  createFileRoute,
-  useLocation,
-  useRouter,
-} from "@tanstack/react-router"
-import { AuthProvider } from "~/context/FirebaseContext"
-import { Nav } from "~/components/Nav/Nav"
+import { Outlet, createFileRoute, useLocation } from "@tanstack/react-router"
 import { Suspense } from "react"
+import { Nav } from "~/components/Nav/Nav"
+// import { AuthProvider } from "~/context/FirebaseContext"
 import { ProfileProvider } from "~/context/ProfileContext"
 
 export const Route = createFileRoute("/_app")({
@@ -23,12 +18,12 @@ function LayoutComponent() {
         </div>
       }
     >
-      <AuthProvider>
-        <ProfileProvider>
-          {location.pathname === "/auth" ? null : <Nav />}
-          <Outlet />
-        </ProfileProvider>
-      </AuthProvider>
+      {/* <AuthProvider> */}
+      <ProfileProvider>
+        {location.pathname === "/auth" ? null : <Nav />}
+        <Outlet />
+      </ProfileProvider>
+      {/* </AuthProvider> */}
     </Suspense>
   )
 }

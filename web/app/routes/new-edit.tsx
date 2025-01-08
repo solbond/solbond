@@ -6,8 +6,8 @@ import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import { $createProduct } from "~/actions/actions"
-import { useAuth } from "~/context/FirebaseContext"
+// import { $createProduct } from "~/actions/actions"
+// import { useAuth } from "~/context/FirebaseContext"
 import { cn } from "~/lib/utils"
 import { Badge } from "~/components/Badge"
 import { Tag } from "lucide-react"
@@ -38,7 +38,7 @@ function RouteComponent() {
   console.log(category, "category")
   const [description, setDescription] = useState("")
   // const [showPreview, setShowPreview] = useState(false)
-  const { user } = useAuth()
+  // const { user } = useAuth()
   const [uploadedImages, setUploadedImages] = useState<string[]>([])
   const [inputTag, setInputTag] = useState("")
   const [uploadedDocuments, setUploadedDocuments] = useState<File[]>([])
@@ -103,10 +103,10 @@ function RouteComponent() {
       .slice(0, MAX_TAG_LENGTH)
     if (
       normalizedTag &&
-      !form.state.values.tags.includes(normalizedTag) &&
+      // !form.state.values.tags.includes(normalizedTag) &&
       form.state.values.tags.length < 5
     ) {
-      form.setFieldValue("tags", [...form.state.values.tags, normalizedTag])
+      // form.setFieldValue("tags", [...form.state.values.tags, normalizedTag])
       setInputTag("")
     }
   }
@@ -149,7 +149,7 @@ function RouteComponent() {
     if (files) {
       const newDocuments = Array.from(files)
       setUploadedDocuments((prev) => [...prev, ...newDocuments])
-      form.setFieldValue("documents", [...uploadedDocuments, ...newDocuments])
+      // form.setFieldValue("documents", [...uploadedDocuments, ...newDocuments])
     }
   }
 
@@ -309,9 +309,9 @@ function RouteComponent() {
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {suggestedTags
-                          .filter(
-                            (tag) => !form.state.values.tags.includes(tag),
-                          )
+                          // .filter(
+                          //   (tag) => !form.state.values.tags.includes(tag),
+                          // )
                           .map((tag) => (
                             <Badge
                               key={tag}
@@ -448,7 +448,7 @@ function RouteComponent() {
                                   (_, i) => i !== index,
                                 )
                                 setUploadedDocuments(newDocs)
-                                form.setFieldValue("documents", newDocs)
+                                // form.setFieldValue("documents", newDocs)
                               }}
                               className="absolute top-2 right-2 p-1.5 bg-black/50 rounded-full text-white hover:opacity-50 transition-all duration-300"
                             >
@@ -674,7 +674,7 @@ function RouteComponent() {
 
               <Button
                 type="submit"
-                disabled={!isFormValid(form.state.values)}
+                // disabled={!isFormValid(form.state.values)}
                 className={cn(
                   "w-full mt-6 font-pressStart relative overflow-hidden",
                   "bg-gradient-to-r from-[var(--neon-cyan)] to-[var(--neon-cyan)]",
@@ -685,13 +685,13 @@ function RouteComponent() {
                   "before:animate-shimmer",
                   "before:bg-[linear-gradient(110deg,transparent,rgba(20,241,149,0.3),transparent)]",
                   "text-lg py-6",
-                  {
-                    "opacity-50 cursor-not-allowed before:hidden": !isFormValid(
-                      form.state.values,
-                    ),
-                    "hover:shadow-[0_0_20px_rgba(20,241,149,0.5)] hover:-translate-y-0.5 hover:scale-[1.02]":
-                      isFormValid(form.state.values),
-                  },
+                  // {
+                  //   "opacity-50 cursor-not-allowed before:hidden": !isFormValid(
+                  //     form.state.values,
+                  //   ),
+                  //   "hover:shadow-[0_0_20px_rgba(20,241,149,0.5)] hover:-translate-y-0.5 hover:scale-[1.02]":
+                  //     isFormValid(form.state.values),
+                  // },
                 )}
               >
                 Create
@@ -700,7 +700,7 @@ function RouteComponent() {
               <Button
                 type="button"
                 variant="outline"
-                onClick={() => setShowPreview(true)}
+                // onClick={() => setShowPreview(true)}
                 className={cn(
                   "w-full font-pressStart relative",
                   "border-2 border-[var(--neon-cyan)]/30 bg-black/5 dark:bg-white/5",

@@ -1,8 +1,8 @@
 import { useRouter } from "@tanstack/react-router"
-import { signOut } from "firebase/auth"
+// import { signOut } from "firebase/auth"
 import { motion } from "framer-motion"
 import { UserIcon, BellIcon, PlusIcon } from "lucide-react"
-import { useAuth } from "~/context/FirebaseContext"
+// import { useAuth } from "~/context/FirebaseContext"
 import { auth } from "~/lib/firebase"
 import { ArrowRightIcon } from "lucide-react"
 import { useEffect, useState } from "react"
@@ -11,7 +11,7 @@ import { useProfiles } from "~/context/ProfileContext"
 
 export const Nav = () => {
   const router = useRouter()
-  const { user } = useAuth()
+  // const { user } = useAuth()
   const [isScrolled, setIsScrolled] = useState(false)
   const { myProfile } = useProfiles()
 

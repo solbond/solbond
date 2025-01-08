@@ -1,5 +1,5 @@
 import { useRouter } from "@tanstack/react-router"
-import { signInWithEmailAndPassword } from "firebase/auth"
+// import { signInWithEmailAndPassword } from "firebase/auth"
 import { useState } from "react"
 import { auth } from "~/lib/firebase"
 import { ErrorType } from "~/routes/_app/auth"
@@ -26,17 +26,16 @@ export default function SignInCase({
 
   const handleSignIn = () => {
     setError(null)
-
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user
-        router.navigate({ to: "/" })
-      })
-      .catch((error) => {
-        const errorCode = error.code
-        setError(getError(errorCode))
-        console.log(errorCode, error.message)
-      })
+    // signInWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     const user = userCredential.user
+    //     router.navigate({ to: "/" })
+    //   })
+    //   .catch((error) => {
+    //     const errorCode = error.code
+    //     setError(getError(errorCode))
+    //     console.log(errorCode, error.message)
+    //   })
   }
 
   const isFormFilled = email.trim() !== "" && password.trim() !== ""
