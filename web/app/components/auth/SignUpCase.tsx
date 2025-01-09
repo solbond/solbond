@@ -1,13 +1,6 @@
-import {
-  createUserWithEmailAndPassword,
-  sendEmailVerification,
-} from "firebase/auth"
 import { useState } from "react"
-import { $createUser, $verifyUser } from "~/actions/actions"
-import { auth } from "~/lib/firebase"
-import { ErrorType } from "~/routes/_app/auth"
-import { getError } from "./Errors"
 import { EyeIcon, EyeOffIcon } from "lucide-react"
+import { ErrorType } from "~/routes/_app/auth"
 
 export default function SignUpCase({
   setCurrentCase,
@@ -26,40 +19,40 @@ export default function SignUpCase({
   const [error, setError] = useState<ErrorType>(null)
   const [showPassword, setShowPassword] = useState(false)
 
-  const handleSignUp = () => {
-    setError(null)
+  // const handleSignUp = () => {
+  //   setError(null)
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(async (userCredential) => {
-        const user = userCredential.user
+  //   createUserWithEmailAndPassword(auth, email, password)
+  //     .then(async (userCredential) => {
+  //       const user = userCredential.user
 
-        const res = await $createUser({
-          data: {
-            email: user.email as string,
-            uid: user.uid,
-          },
-        })
-        console.log(res, "res")
+  //       const res = await $createUser({
+  //         data: {
+  //           email: user.email as string,
+  //           uid: user.uid,
+  //         },
+  //       })
+  //       console.log(res, "res")
 
-        sendEmailVerification(user)
-          .then(async () => {
-            setCurrentCase("link-sent")
-          })
-          .catch((error) => {
-            setError({
-              type: "other",
-              message: "Failed to send verification email. Please try again.",
-            })
-            console.log(error.code, error.message)
-          })
-      })
-      .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        setError(getError(errorCode))
-        console.log(errorCode, errorMessage)
-      })
-  }
+  //       sendEmailVerification(user)
+  //         .then(async () => {
+  //           setCurrentCase("link-sent")
+  //         })
+  //         .catch((error) => {
+  //           setError({
+  //             type: "other",
+  //             message: "Failed to send verification email. Please try again.",
+  //           })
+  //           console.log(error.code, error.message)
+  //         })
+  //     })
+  //     .catch((error) => {
+  //       const errorCode = error.code
+  //       const errorMessage = error.message
+  //       setError(getError(errorCode))
+  //       console.log(errorCode, errorMessage)
+  //     })
+  // }
 
   const isFormFilled = email.trim() !== "" && password.trim() !== ""
 
@@ -119,7 +112,8 @@ export default function SignUpCase({
       )}
 
       <button
-        onClick={handleSignUp}
+        // onClick={handleSignUp}
+        onClick={() => {}}
         disabled={!isFormFilled}
         className={`w-full mt-4 font-bold p-3 rounded-xl transition-all duration-300
           ${

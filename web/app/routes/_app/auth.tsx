@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router"
-import { createUserWithEmailAndPassword } from "firebase/auth"
+// import { createUserWithEmailAndPassword } from "firebase/auth"
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
 import LinkSentCase from "~/components/auth/LinkSentCase"
 import SignInCase from "~/components/auth/SignInCase"
 import SignUpCase from "~/components/auth/SignUpCase"
 import VerifiedCase from "~/components/auth/VerifiedCase"
-import { useAuth } from "~/context/FirebaseContext"
+// import { useAuth } from "~/context/FirebaseContext"
 import { auth } from "~/lib/firebase"
 import { CyberTransition } from "~/components/transitions/CyberTransition"
 
@@ -18,7 +18,7 @@ export type ErrorType = {
 function RouteComponent() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const { user } = useAuth()
+  // const { user } = useAuth()
 
   const [currentCase, setCurrentCase] = useState<
     "signup" | "login" | "link-sent" | "verified" | "forgot-password"

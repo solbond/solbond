@@ -7,7 +7,8 @@ export const UserModel = model({
     verified: boolean(),
     username: string(),
     description: string(),
-    clerkId: string({ unique: true }),
+    // auth
+    jwtAccessToken: string(),
   },
 })
 

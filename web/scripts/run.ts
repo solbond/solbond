@@ -1,5 +1,6 @@
 import ronin from "ronin"
 import * as models from "../schema/index"
+
 const { add, get } = ronin({ models })
 
 async function main() {
