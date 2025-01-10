@@ -7,7 +7,7 @@
     "dev": "vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
-    "ronin-migrate": "bunx ronin@latest --prod migration create && bunx ronin@latest --prod migration apply",
+    "ronin-migrate": "bunx ronin@latest migration create --prod --apply",
     "s": "bun --watch scripts/run.ts"
   },
   "dependencies": {
