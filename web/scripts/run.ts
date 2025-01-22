@@ -1,4 +1,4 @@
-import db from "ronin/db"
+import db from "@/ronin/db"
 
 async function main() {
   const users = await db.get.users()
