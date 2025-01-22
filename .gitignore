@@ -16,7 +16,9 @@ pnpm-lock.yaml
 private
 private.*
 private-*
+p-*
 past.*
 past-*
-scripts/run.ts
 *.bike
+*.db
+.repo_ignore

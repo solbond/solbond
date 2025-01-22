@@ -8,7 +8,8 @@
     "build": "vinxi build",
     "start": "vinxi start",
     "ronin:migrate": "bunx ronin diff --apply",
-    "s": "bun --watch scripts/run.ts"
+    "s": "bun --watch scripts/run.ts",
+    "sr": "bun --watch scripts/p-run.ts"
   },
   "dependencies": {
     "@clerk/tanstack-start": "^0.8.6",
