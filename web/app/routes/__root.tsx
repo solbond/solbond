@@ -7,12 +7,12 @@ import {
 import { Meta, Scripts } from "@tanstack/start"
 import * as React from "react"
 import { Suspense } from "react"
-import { DefaultCatchBoundary } from "~/components/DefaultCatchBoundary"
-import { Fonts } from "~/components/Fonts"
-import { NotFound } from "~/components/NotFound"
-import { seo } from "~/lib/seo"
-import appCss from "~/styles/app.css?url"
+import appCss from "../styles/app.css"
 import { ClerkProvider } from "@clerk/tanstack-start"
+import { Fonts } from "../components/Fonts"
+import { seo } from "../lib/seo"
+import { DefaultCatchBoundary } from "../components/DefaultCatchBoundary"
+import { NotFound } from "../components/NotFound"
 
 function RootComponent() {
   return (

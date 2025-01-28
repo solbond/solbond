@@ -19,7 +19,7 @@ const ShortcutKey = ({
     >
       <span
         className={cn("ml-4", {
-          "bg-accent self-end rounded p-1 leading-3": withBg,
+          "bg-accent self-end rounded-sm p-1 leading-3": withBg,
         })}
       >
         {getShortcutKeys(keys)}

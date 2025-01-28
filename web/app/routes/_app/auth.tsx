@@ -34,7 +34,7 @@ function RouteComponent() {
     <>
       <CyberTransition isPresent={isTransitioning} />
       <div className="h-screen w-full overflow-hidden relative flex flex-col sm:flex-row">
-        <div className="w-full sm:w-2/3 h-1/3 sm:h-full relative bg-gradient-to-br from-emerald-500/80 to-cyan-500/80 dark:from-emerald-500/20 dark:to-cyan-500/20">
+        <div className="w-full sm:w-2/3 h-1/3 sm:h-full relative bg-linear-to-br from-emerald-500/80 to-cyan-500/80 dark:from-emerald-500/20 dark:to-cyan-500/20">
           <motion.div
             initial={{ scale: 1.5 }}
             animate={{ scale: [1.5, 1.7, 1.5] }}

@@ -31,7 +31,7 @@ export const Nav = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="flex z-[100] justify-between border-b-[1px] bg-blur-sm shadow-sm dark:shadow-[0_1px_12px_-2px_var(--neon-cyan)] h-[37px] fixed top-0 left-0 right-0 items-center px-6"
+        className="flex z-100 justify-between border-b-[1px] bg-blur-sm shadow-xs dark:shadow-[0_1px_12px_-2px_var(--neon-cyan)] h-[37px] fixed top-0 left-0 right-0 items-center px-6"
       >
         <div className="flex items-center gap-4">
           <motion.h1
@@ -73,7 +73,7 @@ export const Nav = () => {
         initial={{ y: -37 }}
         animate={{ y: isScrolled ? 37 : -37 }}
         transition={{ duration: 0.3 }}
-        className="flex z-[99] justify-center border-b-[1px] bg-white/50 bg-blur-sm dark:bg-black/50 shadow-sm h-[37px] fixed top-0 left-0 right-0 items-center px-6 md:hidden"
+        className="flex z-99 justify-center border-b-[1px] bg-white/50 bg-blur-sm dark:bg-black/50 shadow-xs h-[37px] fixed top-0 left-0 right-0 items-center px-6 md:hidden"
       >
         <div className="flex items-center gap-6 md:hidden">
           <button className="px-3 py-1 uppercase text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-[var(--neon-cyan)] transition-colors">

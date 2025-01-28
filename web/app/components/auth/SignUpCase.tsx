@@ -69,7 +69,7 @@ export default function SignUpCase({
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Email"
-        className={`w-full p-2 outline-none bg-gray-100 dark:bg-inherit dark:border dark:border-[var(--neon-cyan)] dark:backdrop-blur-sm text-black dark:text-white rounded-md transition-all duration-300
+        className={`w-full p-2 outline-hidden bg-gray-100 dark:bg-inherit dark:border dark:border-[var(--neon-cyan)] dark:backdrop-blur-xs text-black dark:text-white rounded-md transition-all duration-300
           ${
             error?.type === "email"
               ? "border-red-500"
@@ -85,7 +85,7 @@ export default function SignUpCase({
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
-          className={`w-full p-2 outline-none bg-gray-100 dark:bg-inherit dark:border dark:border-[var(--neon-cyan)] dark:backdrop-blur-sm text-black ${showPassword ? "dark:text-white" : "dark:text-[var(--neon-cyan)]"} rounded-md transition-all duration-300
+          className={`w-full p-2 outline-hidden bg-gray-100 dark:bg-inherit dark:border dark:border-[var(--neon-cyan)] dark:backdrop-blur-xs text-black ${showPassword ? "dark:text-white" : "dark:text-[var(--neon-cyan)]"} rounded-md transition-all duration-300
             ${
               error?.type === "password"
                 ? "border-red-500"

@@ -176,10 +176,10 @@ export const HeroRoute = () => {
                   animate={{ width: "140px", scale: 1 }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative border border-emerald-500/50 bg-black/5 dark:bg-black/40 backdrop-blur-sm overflow-hidden justify-end whitespace-nowrap dark:text-emerald-400 h-[44px] font-mono font-semibold rounded-full px-4 py-2 flex gap-2 items-center transition-all group"
+                  className="relative border border-emerald-500/50 bg-black/5 dark:bg-black/40 backdrop-blur-xs overflow-hidden justify-end whitespace-nowrap dark:text-emerald-400 h-[44px] font-mono font-semibold rounded-full px-4 py-2 flex gap-2 items-center transition-all group"
                 >
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-cyan-500/10 to-blue-500/10 dark:from-emerald-500/20 dark:via-cyan-500/20 dark:to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute inset-0 bg-linear-to-r from-emerald-500/10 via-cyan-500/10 to-blue-500/10 dark:from-emerald-500/20 dark:via-cyan-500/20 dark:to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                   />
@@ -211,7 +211,7 @@ export const HeroRoute = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={handleGetStarted}
-                  className="relative border border-emerald-500/50 bg-inherit dark:bg-black/40 backdrop-blur-sm overflow-hidden justify-end whitespace-nowrap dark:text-emerald-400 h-[44px] font-mono font-semibold rounded-full px-4 py-2 flex gap-2 items-center transition-all group cursor-pointer"
+                  className="relative border border-emerald-500/50 bg-inherit dark:bg-black/40 backdrop-blur-xs overflow-hidden justify-end whitespace-nowrap dark:text-emerald-400 h-[44px] font-mono font-semibold rounded-full px-4 py-2 flex gap-2 items-center transition-all group cursor-pointer"
                 >
                   <motion.div
                     className="absolute inset-0 bg-inherit opacity-0 group-hover:opacity-100 transition-opacity"
@@ -256,7 +256,7 @@ export const HeroRoute = () => {
                 </span>
               </span>
               <motion.div
-                className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-emerald-500 via-cyan-500 to-[var(--neon-cyan)]"
+                className="absolute -bottom-2 left-0 w-full h-[2px] bg-linear-to-r from-emerald-500 via-cyan-500 to-[var(--neon-cyan)]"
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 1, delay: 1.5 }}
@@ -292,9 +292,9 @@ export const HeroRoute = () => {
                       ease: [0.6, 0.01, -0.05, 0.95],
                     }}
                     className={`absolute bottom-0 right-0
-                      bg-gradient-to-br from-emerald-500/5 via-cyan-500/5 to-blue-500/5
+                      bg-linear-to-br from-emerald-500/5 via-cyan-500/5 to-blue-500/5
                       dark:from-emerald-500/10 dark:via-cyan-500/10 dark:to-blue-500/10
-                      rounded-2xl backdrop-blur-sm`}
+                      rounded-2xl backdrop-blur-xs`}
                     style={{
                       width: `${size}px`,
                       height: `${size}px`,
@@ -319,13 +319,13 @@ export const HeroRoute = () => {
               <div className="flex gap-1">
                 <button
                   onClick={prevSlide}
-                  className="p-1 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  className="p-1 rounded-xs hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                 >
                   <ChevronLeftIcon className="w-5 h-5" />
                 </button>
                 <button
                   onClick={nextSlide}
-                  className="p-1 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  className="p-1 rounded-xs hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                 >
                   <ChevronRightIcon className="w-5 h-5" />
                 </button>
@@ -342,15 +342,15 @@ export const HeroRoute = () => {
                 <motion.div
                   key={`${category.title}-${index}`}
                   className="group relative overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800
-                    bg-gradient-to-br from-black/5 via-black/0 to-black/5
+                    bg-linear-to-br from-black/5 via-black/0 to-black/5
                     dark:from-white/5 dark:via-white/0 dark:to-white/5
-                    backdrop-blur-sm shadow-lg hover:shadow-2xl
+                    backdrop-blur-xs shadow-lg hover:shadow-2xl
                     transition-all duration-300
                     min-w-[calc(50%-0.5rem)] md:min-w-0 w-full snap-start"
                 >
                   <div className="aspect-square overflow-hidden">
                     <div className="relative h-full w-full">
-                      <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/60 z-10" />
+                      <div className="absolute inset-0 bg-linear-to-b from-black/0 via-black/0 to-black/60 z-10" />
                       <img
                         src={category.image}
                         alt=""
@@ -376,7 +376,7 @@ export const HeroRoute = () => {
 
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent
+                      className="absolute inset-0 bg-linear-to-r from-transparent via-white/5 to-transparent
                       dark:via-white/10 transform -translate-x-full group-hover:translate-x-full transition-transform
                       duration-1000"
                     />
@@ -398,7 +398,7 @@ export const HeroRoute = () => {
             <input
               type="text"
               placeholder="Explore"
-              className="w-full bg-transparent outline-none text-gray-800 dark:text-white monospace"
+              className="w-full bg-transparent outline-hidden text-gray-800 dark:text-white monospace"
             />
           </div>
           <div className="flex flex-wrap justify-center items-center gap-2 mt-4 relative z-20 order-2">
@@ -597,7 +597,7 @@ export const HeroRoute = () => {
                         alt={`NFT #${product.id}`}
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent dark:to-black/90 to-white/20 pointer-events-none" />
+                      <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent dark:to-black/90 to-white/20 pointer-events-none" />
                     </div>
                   </div>
                   <div className="p-4 sm:p-3 space-y-3 sm:space-y-2">

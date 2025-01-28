@@ -159,7 +159,7 @@ function RouteComponent() {
                     whileHover={{ scale: 1.02 }}
                     className={cn(
                       "flex-1 relative overflow-hidden",
-                      "bg-gradient-to-r from-[var(--neon-cyan)] to-[var(--neon-cyan)]",
+                      "bg-linear-to-r from-[var(--neon-cyan)] to-[var(--neon-cyan)]",
                       "text-white dark:text-black border border-[var(--neon-cyan)]",
                       "transition-all duration-300",
                       "before:absolute before:inset-0",

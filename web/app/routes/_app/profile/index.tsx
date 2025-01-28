@@ -39,7 +39,7 @@ function RouteComponent() {
     <div className="min-h-screen pt-10 ">
       <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row gap-6 p-4">
         <div className="w-full md:w-[300px] space-y-4">
-          <div className="cyber-card flex items-center gap-3 p-3 bg-inherit backdrop-blur-sm rounded-xl border border-gray-200 dark:border-gray-800">
+          <div className="cyber-card flex items-center gap-3 p-3 bg-inherit backdrop-blur-xs rounded-xl border border-gray-200 dark:border-gray-800">
             <img
               src={userData.avatar}
               alt={userData.name}
@@ -59,18 +59,18 @@ function RouteComponent() {
               </button>
             </div>
           </div>
-          <div className="hidden md:block cyber-card bg-white dark:bg-black/40 backdrop-blur-sm rounded-xl p-4 border border-gray-200 dark:border-gray-800">
+          <div className="hidden md:block cyber-card bg-white dark:bg-black/40 backdrop-blur-xs rounded-xl p-4 border border-gray-200 dark:border-gray-800">
             <div className="flex items-center  border border-gray-200 dark:border-gray-800 rounded-xl p-2">
               <SearchIcon size={16} />
               <input
                 type="text"
                 placeholder="Search products..."
-                className="w-full bg-transparent rounded-md p-2 placeholder:opacity-60 focus:outline-none focus:ring-none"
+                className="w-full bg-transparent rounded-md p-2 placeholder:opacity-60 focus:outline-hidden focus:ring-none"
               />
             </div>
           </div>
 
-          <div className="cyber-card bg-white dark:bg-black/40 backdrop-blur-sm rounded-xl p-4 space-y-4 border border-gray-200 dark:border-gray-800">
+          <div className="cyber-card bg-white dark:bg-black/40 backdrop-blur-xs rounded-xl p-4 space-y-4 border border-gray-200 dark:border-gray-800">
             <div className="space-y-2">
               <h3 className="font-semibold">About</h3>
               <p className="text-sm opacity-60">{userData.description}</p>
@@ -89,7 +89,7 @@ function RouteComponent() {
             </div>
           </div>
 
-          <div className="cyber-card bg-white dark:bg-black/40 backdrop-blur-sm rounded-xl p-4 space-y-4 border border-gray-200 dark:border-gray-800">
+          <div className="cyber-card bg-white dark:bg-black/40 backdrop-blur-xs rounded-xl p-4 space-y-4 border border-gray-200 dark:border-gray-800">
             <h3 className="font-semibold">Filters</h3>
             <div className="space-y-2">
               {Object.keys(filterOptions).map((filter) => (
@@ -98,7 +98,7 @@ function RouteComponent() {
                     onClick={() =>
                       setOpenFilter(openFilter === filter ? null : filter)
                     }
-                    className="flex items-center justify-between p-2 hover:bg-black/5 dark:hover:bg-white/5 rounded cursor-pointer"
+                    className="flex items-center justify-between p-2 hover:bg-black/5 dark:hover:bg-white/5 rounded-sm cursor-pointer"
                   >
                     <span className="opacity-60">{filter}</span>
                     <ChevronRightIcon
@@ -117,7 +117,7 @@ function RouteComponent() {
                       {filterOptions[filter].map((option) => (
                         <div
                           key={option}
-                          className="p-2 text-sm opacity-60 hover:opacity-100 cursor-pointer hover:bg-black/5 dark:hover:bg-white/5 rounded"
+                          className="p-2 text-sm opacity-60 hover:opacity-100 cursor-pointer hover:bg-black/5 dark:hover:bg-white/5 rounded-sm"
                         >
                           {option}
                         </div>
@@ -135,7 +135,7 @@ function RouteComponent() {
             <input
               type="text"
               placeholder="Search products..."
-              className="w-full bg-transparent border border-gray-200 dark:border-gray-800 rounded-xl p-3 placeholder:opacity-60 focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:focus:ring-[var(--neon-cyan)]"
+              className="w-full bg-transparent border border-gray-200 dark:border-gray-800 rounded-xl p-3 placeholder:opacity-60 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 dark:focus:ring-[var(--neon-cyan)]"
             />
           </div>
 
@@ -154,7 +154,7 @@ function RouteComponent() {
               <Link
                 key={product.id}
                 to={`/profile/${userData.id}/product/${product.id}`}
-                className="cyber-card bg-white dark:bg-black/40 backdrop-blur-sm rounded-xl overflow-hidden hover:scale-[1.02] transition-all cursor-pointer border border-gray-200 dark:border-gray-800"
+                className="cyber-card bg-white dark:bg-black/40 backdrop-blur-xs rounded-xl overflow-hidden hover:scale-[1.02] transition-all cursor-pointer border border-gray-200 dark:border-gray-800"
               >
                 <div className="relative h-[200px] w-full">
                   <img
@@ -162,7 +162,7 @@ function RouteComponent() {
                     alt={product.name}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute top-3 right-3 px-3 py-1 rounded-md bg-gray-300/10 backdrop-blur-sm text-[var(--neon-cyan)] font-semibold">
+                  <div className="absolute top-3 right-3 px-3 py-1 rounded-md bg-gray-300/10 backdrop-blur-xs text-[var(--neon-cyan)] font-semibold">
                     ${product.price}
                   </div>
                 </div>

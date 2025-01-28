@@ -247,7 +247,7 @@ function RouteComponent() {
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                     className={cn(
-                                      "flex items-center bg-black/10 dark:bg-white/5 backdrop-blur-sm border rounded-lg border-black/10 dark:border-[var(--neon-cyan)]/20 px-2 py-1.5 transition-all duration-300 hover:border-[var(--neon-cyan)] group",
+                                      "flex items-center bg-black/10 dark:bg-white/5 backdrop-blur-xs border rounded-lg border-black/10 dark:border-[var(--neon-cyan)]/20 px-2 py-1.5 transition-all duration-300 hover:border-[var(--neon-cyan)] group",
                                       snapshot.isDragging && "shadow-lg",
                                     )}
                                   >
@@ -277,7 +277,7 @@ function RouteComponent() {
 
                     {field.state.value.length < 5 && (
                       <div className="relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-[var(--neon-cyan)]/10 to-emerald-500/10" />
+                        <div className="absolute inset-0 bg-linear-to-r from-[var(--neon-cyan)]/10 to-emerald-500/10" />
                         <div className="absolute inset-0 border border-[var(--neon-cyan)]/20 transition-colors duration-300 group-hover:border-[var(--neon-cyan)]" />
                         <Input
                           type="text"
@@ -359,7 +359,7 @@ function RouteComponent() {
                   <motion.div
                     whileHover={{ borderColor: "var(--neon-cyan)" }}
                     className={cn(
-                      "w-full border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-lg hover:bg-white/60 dark:hover:bg-black/30 transition-all duration-300 backdrop-blur-sm",
+                      "w-full border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-lg hover:bg-white/60 dark:hover:bg-black/30 transition-all duration-300 backdrop-blur-xs",
                       "p-4 text-center",
                     )}
                   >
@@ -397,7 +397,7 @@ function RouteComponent() {
                               block: "center",
                             })
                           }}
-                          className="min-h-[200px] bg-inherit border-b border-b-gray-300 dark:border-b-gray-700 backdrop-blur-sm text-black dark:text-white"
+                          className="min-h-[200px] bg-inherit border-b border-b-gray-300 dark:border-b-gray-700 backdrop-blur-xs text-black dark:text-white"
                         />
                       </div>
                     </motion.div>
@@ -425,7 +425,7 @@ function RouteComponent() {
                         {uploadedDocuments.map((doc, index) => (
                           <div
                             key={index}
-                            className="relative aspect-[3/2] rounded-lg overflow-hidden border-2 border-gray-200 dark:border-gray-700 p-4 backdrop-blur-sm"
+                            className="relative aspect-3/2 rounded-lg overflow-hidden border-2 border-gray-200 dark:border-gray-700 p-4 backdrop-blur-xs"
                           >
                             <div className="flex flex-col items-center justify-center h-full gap-2">
                               <div className="text-4xl">
@@ -460,8 +460,8 @@ function RouteComponent() {
                         <motion.div
                           whileHover={{ borderColor: "var(--neon-cyan)" }}
                           className={cn(
-                            "flex items-center justify-center border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg hover:bg-white/60 dark:hover:bg-black/30 transition-all duration-300 backdrop-blur-sm",
-                            "aspect-[3/2]",
+                            "flex items-center justify-center border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg hover:bg-white/60 dark:hover:bg-black/30 transition-all duration-300 backdrop-blur-xs",
+                            "aspect-3/2",
                             uploadedDocuments.length === 0
                               ? "col-span-full"
                               : "",
@@ -532,8 +532,8 @@ function RouteComponent() {
                           <motion.div
                             whileHover={{ borderColor: "var(--neon-cyan)" }}
                             className={cn(
-                              "flex items-center justify-center border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg hover:bg-white/60 dark:hover:bg-black/30 transition-all duration-300 backdrop-blur-sm",
-                              "aspect-square md:aspect-[2/1]",
+                              "flex items-center justify-center border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg hover:bg-white/60 dark:hover:bg-black/30 transition-all duration-300 backdrop-blur-xs",
+                              "aspect-square md:aspect-2/1",
                               uploadedImages.length === 0
                                 ? "col-span-full"
                                 : "",
@@ -603,7 +603,7 @@ function RouteComponent() {
                       <input
                         type="checkbox"
                         id="discount"
-                        className="appearance-none w-5 h-5 border-2 border-gray-300 dark:border-gray-700 bg-transparent checked:bg-[var(--neon-cyan)] checked:border-[var(--neon-cyan)] focus:outline-none transition-all duration-300 mr-2"
+                        className="appearance-none w-5 h-5 border-2 border-gray-300 dark:border-gray-700 bg-transparent checked:bg-[var(--neon-cyan)] checked:border-[var(--neon-cyan)] focus:outline-hidden transition-all duration-300 mr-2"
                         onChange={(e) => setDiscount(e.target.checked)}
                       />
 
@@ -619,7 +619,7 @@ function RouteComponent() {
                       <input
                         type="checkbox"
                         id="allowCrypto"
-                        className="appearance-none w-5 h-5 border-2 border-gray-300 dark:border-gray-700 bg-transparent checked:bg-[var(--neon-cyan)] checked:border-[var(--neon-cyan)] focus:outline-none transition-all duration-300 mr-2"
+                        className="appearance-none w-5 h-5 border-2 border-gray-300 dark:border-gray-700 bg-transparent checked:bg-[var(--neon-cyan)] checked:border-[var(--neon-cyan)] focus:outline-hidden transition-all duration-300 mr-2"
                         onChange={(e) => setAllowCrypto(e.target.checked)}
                       />
 
@@ -642,7 +642,7 @@ function RouteComponent() {
                               <input
                                 type="checkbox"
                                 id={crypto}
-                                className="appearance-none w-5 h-5 border-2 border-gray-300 dark:border-gray-700 bg-transparent checked:bg-[var(--neon-cyan)] checked:border-[var(--neon-cyan)] focus:outline-none transition-all duration-300 mr-2"
+                                className="appearance-none w-5 h-5 border-2 border-gray-300 dark:border-gray-700 bg-transparent checked:bg-[var(--neon-cyan)] checked:border-[var(--neon-cyan)] focus:outline-hidden transition-all duration-300 mr-2"
                                 checked={selectedCryptos.includes(crypto)}
                                 onChange={(e) => {
                                   if (e.target.checked) {
@@ -677,7 +677,7 @@ function RouteComponent() {
                 // disabled={!isFormValid(form.state.values)}
                 className={cn(
                   "w-full mt-6 font-pressStart relative overflow-hidden",
-                  "bg-gradient-to-r from-[var(--neon-cyan)] to-[var(--neon-cyan)]",
+                  "bg-linear-to-r from-[var(--neon-cyan)] to-[var(--neon-cyan)]",
                   "text-white dark:text-black border border-[var(--neon-cyan)]",
                   "transition-all duration-300",
                   "before:absolute before:inset-0",
@@ -705,7 +705,7 @@ function RouteComponent() {
                   "w-full font-pressStart relative",
                   "border-2 border-[var(--neon-cyan)]/30 bg-black/5 dark:bg-white/5",
                   "text-[var(--neon-cyan)] dark:text-[var(--neon-cyan)]",
-                  "backdrop-blur-sm",
+                  "backdrop-blur-xs",
                   "transition-all duration-300",
                   "hover:border-[var(--neon-cyan)] hover:bg-[var(--neon-cyan)]/10",
                   "hover:shadow-[0_0_15px_rgba(20,241,149,0.2)]",

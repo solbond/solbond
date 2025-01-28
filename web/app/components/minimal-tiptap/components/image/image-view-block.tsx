@@ -27,7 +27,7 @@ const ImageViewBlock = ({ editor, node, getPos }: NodeViewProps) => {
             <div className="absolute h-full w-full">
               <div
                 className={cn(
-                  "relative h-full max-h-full w-full max-w-full rounded transition-all",
+                  "relative h-full max-h-full w-full max-w-full rounded-sm transition-all",
                 )}
                 style={{
                   boxShadow:

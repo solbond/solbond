@@ -1,22 +1,80 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-:root {
-  --neon-cyan: #006b4e;
-  --neon-green: #067e06;
-  --neon-yellow: #ff9900;
-  --dark-bg: #0d0d0d;
-  --dark-card: rgba(0, 0, 0, 0.8);
-  --background: theme(colors.white);
+@custom-variant dark (@media (prefers-color-scheme: dark));
+
+@theme {
+  --font-proto: JetBrains Mono, monospace;
+  --font-mono: Space Mono, monospace;
+  --font-press-start: 'Press Start 2P';
+  --font-ubuntu: Ubuntu, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: theme(colors.black);
-  --neon-cyan: #00eaab;
-  --neon-green: #00ff00;
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
 
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@utility neon-border {
+  @apply border shadow-md border-gray-200;
+  @apply dark:shadow-[0_0_15px_var(--neon-cyan),inset_0_0_10px_var(--neon-cyan)] dark:border-[var(--neon-cyan)];
+}
+
+@utility neon-text {
+  @apply text-gray-900;
+  @apply dark:text-[var(--neon-cyan)];
+}
+
+@utility neon-text-green {
+  @apply text-green-600;
+  @apply dark:text-[var(--neon-green)];
+}
+
+@utility cyber-card {
+  @apply border border-gray-200
+           shadow-md dark:shadow-[0_0_10px_rgba(0,234,171,0.2)]
+           backdrop-blur-sm transition-all duration-300;
+
+  &:hover {
+    @apply border-emerald-700 dark:border-[var(--neon-cyan)];
+    @apply dark:animate-[neonBorderGlow_1s_infinite];
+  }
+}
+
+@utility neon-border-bottom {
+  @apply border-b-[1px] border-gray-200;
+  @apply dark:border-b-[var(--neon-cyan)];
+  @apply dark:shadow-[0_1px_12px_-2px_var(--neon-cyan)];
+}
+
+@layer utilities {
+  :root {
+    --neon-cyan: #006b4e;
+    --neon-green: #067e06;
+    --neon-yellow: #ff9900;
+    --dark-bg: #0d0d0d;
+    --dark-card: rgba(0, 0, 0, 0.8);
+    --background: var(--color-white);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: var(--color-black);
+      --neon-cyan: #00eaab;
+      --neon-green: #00ff00;
+    }
   }
 }
 
@@ -28,42 +86,6 @@
     html {
       @apply bg-[var(--dark-bg)] text-[var(--neon-cyan)];
     }
-  }
-}
-
-@layer components {
-  .neon-border {
-    @apply border shadow-md border-gray-200;
-    @apply dark:shadow-[0_0_15px_var(--neon-cyan),inset_0_0_10px_var(--neon-cyan)] dark:border-[var(--neon-cyan)];
-  }
-
-  .neon-text {
-    @apply text-gray-900;
-    @apply dark:text-[var(--neon-cyan)] ;
-  }
-
-  .neon-text-green {
-    @apply text-green-600;
-    @apply dark:text-[var(--neon-green)] ;
-  }
-
-
-  .cyber-card {
-    @apply
-           border border-gray-200
-           shadow-md dark:shadow-[0_0_10px_rgba(0,234,171,0.2)]
-           backdrop-blur transition-all duration-300;
-  }
-
-  .cyber-card:hover {
-    @apply border-emerald-700 dark:border-[var(--neon-cyan)];
-    @apply dark:animate-[neonBorderGlow_1s_infinite];
-  }
-
-  .neon-border-bottom {
-    @apply border-b-[1px] border-gray-200;
-    @apply dark:border-b-[var(--neon-cyan)];
-    @apply dark:shadow-[0_1px_12px_-2px_var(--neon-cyan)];
   }
 }
 

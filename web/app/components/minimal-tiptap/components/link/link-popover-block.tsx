@@ -30,7 +30,7 @@ const LinkPopoverBlock = ({
   }
 
   return (
-    <div className="bg-background flex h-10 overflow-hidden rounded p-2 shadow-lg">
+    <div className="bg-background flex h-10 overflow-hidden rounded-sm p-2 shadow-lg">
       <div className="inline-flex items-center gap-1">
         <ToolbarButton tooltip="Edit link" onClick={onEdit}>
           Edit link
