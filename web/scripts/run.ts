@@ -2,7 +2,7 @@ import { get, add, remove } from "ronin"
 
 async function main() {
   // await run()
-  await createUser()
+  // await createUser()
   // await resetData()
 }
 
