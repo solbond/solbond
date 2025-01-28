@@ -7,7 +7,7 @@ import {
 import { Meta, Scripts } from "@tanstack/start"
 import * as React from "react"
 import { Suspense } from "react"
-import appCss from "../styles/app.css"
+import appCss from "../styles/app.css?url"
 import { ClerkProvider } from "@clerk/tanstack-start"
 import { Fonts } from "../components/Fonts"
 import { seo } from "../lib/seo"
