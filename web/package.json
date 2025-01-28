@@ -7,7 +7,7 @@
     "dev": "vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
-    "ronin:migrate": "bunx ronin diff --apply",
+    "ronin:migrate": "bunx ronin diff ronin/ronin-schema.ts --apply",
     "s": "bun --watch scripts/run.ts",
     "sr": "bun --watch scripts/p-run.ts"
   },

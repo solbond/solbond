@@ -1,11 +1,11 @@
-@import 'tailwindcss' source("../");
+@import "tailwindcss" source("../");
 
 @custom-variant dark (@media (prefers-color-scheme: dark));
 
 @theme {
   --font-proto: JetBrains Mono, monospace;
   --font-mono: Space Mono, monospace;
-  --font-press-start: 'Press Start 2P';
+  --font-press-start: "Press Start 2P";
   --font-ubuntu: Ubuntu, sans-serif;
 }
 
@@ -89,7 +89,6 @@
   }
 }
 
-
 .monospace {
   font-family: "Space Mono", monospace;
 }
@@ -163,9 +162,15 @@
 }
 
 @keyframes cyber-pulse {
-  0% { opacity: 0.5; }
-  50% { opacity: 1; }
-  100% { opacity: 0.5; }
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
 }
 
 .animate-pulse {
@@ -179,6 +184,3 @@
 .delay-150 {
   animation-delay: 150ms;
 }
-
-
-
