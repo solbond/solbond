@@ -52,7 +52,7 @@
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
     "redaxios": "^0.5.1",
-    "ronin": "^6.0.24",
+    "ronin": "^6.0.28",
     "tailwind-merge": "^2.6.0",
     "tiptap": "^1.32.2",
     "vinxi": "0.5.1"

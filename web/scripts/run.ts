@@ -4,10 +4,16 @@ async function main() {
   // await run()
   // await createUser()
   // await resetData()
+  await getUsers()
 }
 
 async function resetData() {
   await remove.users()
+}
+
+async function getUsers() {
+  const users = await get.users()
+  console.log(users)
 }
 
 async function createUser() {
