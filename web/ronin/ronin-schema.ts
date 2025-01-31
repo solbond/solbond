@@ -8,7 +8,6 @@ export const UserModel = model({
     username: string({ unique: true, required: true }), // user needs unique username (just like X/GitHub), will be seen as solbond.co/<username>
     verifiedCreator: boolean(), // user is a verified creator (more trust, means products can show in search/discover faster)
     bio: string(), // user bio
-    jwtAccessToken: string(), // TODO: make work with openauth
   },
 })
 
