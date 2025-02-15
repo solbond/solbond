@@ -1,13 +1,7 @@
 import { get, add, remove } from "ronin"
 
-async function main() {
-  await run()
-  // await createUser()
-  // await resetData()
-  // await getUsers()
-}
 await main()
-console.log("done")
+console.log("✔️")
 
 async function resetData() {
   await remove.users()
@@ -28,7 +22,10 @@ async function createUser() {
   console.log(user)
 }
 
-async function run() {
-  const users = await get.users()
-  console.log(users)
-}
+async function main() {}
+
+// const users = await get.users()
+// console.log(users)
+// await createUser()
+// await resetData()
+// await getUsers()
