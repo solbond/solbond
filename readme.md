@@ -2,6 +2,14 @@
 
 > Sell digital products, services
 
-## Web
+## Setup
 
-See [web](web) to run website.
+```
+bun i
+```
+
+## Run
+
+```
+bun dev
+```
