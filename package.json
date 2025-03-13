@@ -1,17 +1,11 @@
 {
-  "name": "web",
+  "name": "solbond",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vinxi dev",
     "build": "vinxi build",
-    "start": "vinxi start",
-    "lint": "eslint .",
-    "format": "prettier --write .",
-    "db": "drizzle-kit",
-    "ui": "pnpm dlx shadcn@canary",
-    "auth": "pnpm dlx @better-auth/cli@latest",
-    "auth:generate": "pnpm dlx @better-auth/cli@latest generate --y --output ./src/lib/server/schema/auth.schema.ts && prettier --write ./src/lib/server/schema/auth.schema.ts"
+    "start": "vinxi start"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.2",
@@ -46,7 +40,6 @@
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "babel-plugin-react-compiler": "^19.0.0-beta-bafa41b-20250307",
-    "drizzle-kit": "^0.30.5",
     "eslint": "^9.22.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-react-compiler": "^19.0.0-beta-bafa41b-20250307",
