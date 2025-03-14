@@ -36,6 +36,12 @@ function RouteComponent() {
 
   return (
     <div className="p-4">
+      {me?.root.links.map((link) => (
+        <div key={link.id}>
+          <h2>{link.title}</h2>
+          <p>{link.url}</p>
+        </div>
+      ))}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="title" className="block mb-1">

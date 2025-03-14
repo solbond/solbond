@@ -1,4 +1,8 @@
-import { Account, CoList, CoMap, Group, Profile, co } from "jazz-tools"
+import { Account, CoList, CoMap, Group, ID, Profile, co } from "jazz-tools"
+
+export class AllUsers extends CoMap {
+  users = co.ref(CoList.Of(co.ref(JazzAccount)))
+}
 
 export class Link extends CoMap {
   url = co.string
@@ -32,13 +36,9 @@ export class JazzAccount extends Account {
   }) {
     if (this.root === undefined && creationProps) {
       await this.initialMigration(creationProps)
+      // AllUsers.push
       return
     }
-    // uncomment this to add migrations
-    // const currentVersion = this.root?.version || 0;
-    // if (currentVersion < 1) {
-    //   await this.migrationV1();
-    // }
   }
 
   private async initialMigration(creationProps: {
@@ -46,6 +46,14 @@ export class JazzAccount extends Account {
     other?: Record<string, unknown>
   }) {
     const { name, other } = creationProps
+
+    const adminAccount = (await Account.load(
+      "co_zAsBcQzQzhcrK6TYhV7RmmGXZRD" as ID<Account>,
+      this,
+      {},
+    )) as Account
+    console.log(adminAccount, "admin")
+
     const profileErrors = UserProfile.validate({ name, ...other })
     if (profileErrors.errors.length > 0) {
       throw new Error(
@@ -62,6 +70,7 @@ export class JazzAccount extends Account {
     )
 
     const privateGroup = Group.create({ owner: this })
+    privateGroup.addMember(adminAccount, "admin")
 
     // initialize root structure with version
     this.root = AccountRoot.create(
