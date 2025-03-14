@@ -16,7 +16,7 @@ function LayoutComponent() {
     <>
       <JazzProvider
         sync={{
-          peer: "wss://cloud.jazz.tools/?key=react-passkey-auth@garden.co",
+          peer: "wss://cloud.jazz.tools/?key=jazz@solbond.co",
           when: "signedUp", // makes users who have not signed up, store data only locally
         }}
         AccountSchema={JazzAccount}

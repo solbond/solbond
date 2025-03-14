@@ -1,9 +1,13 @@
-import { Account, CoMap, Group, Profile, co } from "jazz-tools"
+import { Account, CoList, CoMap, Group, Profile, co } from "jazz-tools"
 
-export class Container extends CoMap {}
+export class Link extends CoMap {
+  url = co.string
+  title = co.string
+}
+export const LinkCollection = CoList.Of(co.ref(Link))
 
 export class AccountRoot extends CoMap {
-  container = co.ref(Container)
+  links = co.ref(LinkCollection)
   version = co.optional.number
 }
 
@@ -26,7 +30,7 @@ export class JazzAccount extends Account {
     name: string
     other?: Record<string, unknown>
   }) {
-    if (!this._refs.root && creationProps) {
+    if (this.root === undefined && creationProps) {
       await this.initialMigration(creationProps)
       return
     }
@@ -59,15 +63,11 @@ export class JazzAccount extends Account {
 
     const privateGroup = Group.create({ owner: this })
 
-    // create initial container with empty collections
-    const defaultContainer = Container.create({}, { owner: privateGroup })
-
     // initialize root structure with version
     this.root = AccountRoot.create(
       {
-        container: defaultContainer,
+        links: LinkCollection.create([], { owner: privateGroup }),
         version: 0,
-        // here owner is always "this" Account
       },
       { owner: this },
     )
