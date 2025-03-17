@@ -5,7 +5,6 @@ import { cn } from "~/lib/utils"
 import { TypingEffect } from "~/components/TypingEffect"
 import { useNavigate } from "@tanstack/react-router"
 import { productTypes } from "~/constants/productTypes"
-import Arrow from "../../../public/svg/arrow"
 
 function RouteComponent() {
   const [category, setCategory] = useState<string>("")
@@ -16,7 +15,7 @@ function RouteComponent() {
       const selectedType = productTypes.find((type) => type.id === category)
       if (selectedType) {
         navigate({
-          to: "/new-edit",
+          to: "/profile/new",
           search: { category: selectedType.category },
         })
       }

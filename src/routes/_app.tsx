@@ -27,8 +27,6 @@ function LayoutComponent() {
           <main className="min-h-screen flex flex-col">
             <div className="flex flex-col min-h-screen w-full pt-14">
               <div className="flex flex-1 w-full">
-                <Nav />
-                <HeroRoute />
                 <Outlet />
               </div>
             </div>
