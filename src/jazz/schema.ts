@@ -1,23 +1,30 @@
 import { Account, CoList, CoMap, Group, ID, Profile, co } from "jazz-tools"
 
-export class AllUsers extends CoMap {
-  users = co.ref(CoList.Of(co.ref(JazzAccount)))
+export class Product extends CoMap {
+  name = co.string
+  description = co.string
+  priceInCents = co.optional.number
+  coverImageUrl = co.optional.string
+  userComment = co.optional.string
 }
+export const ProductCollection = CoList.Of(co.ref(Product))
 
-export class Link extends CoMap {
-  url = co.string
-  title = co.string
+export class PublicProduct extends CoMap {
+  name = co.string
+  description = co.string
+  priceInCents = co.number
+  coverImageUrl = co.string
 }
-export const LinkCollection = CoList.Of(co.ref(Link))
+export const PublicProductCollection = CoList.Of(co.ref(PublicProduct))
 
 export class AccountRoot extends CoMap {
-  links = co.ref(LinkCollection)
+  products = co.ref(ProductCollection)
+  publicProducts = co.ref(PublicProductCollection)
   version = co.optional.number
 }
 
 export class UserProfile extends Profile {
   name = co.string
-
   static validate(data: { name?: string; other?: Record<string, unknown> }) {
     const errors: string[] = []
     if (!data.name?.trim()) {
@@ -71,11 +78,15 @@ export class JazzAccount extends Account {
     const privateGroup = Group.create({ owner: this })
     this.root = AccountRoot.create(
       {
-        links: LinkCollection.create([], { owner: privateGroup }),
+        products: ProductCollection.create([], { owner: privateGroup }),
+        publicProducts: PublicProductCollection.create([], {
+          owner: publicGroup,
+        }),
         version: 0,
       },
       { owner: this },
     )
-    privateGroup.addMember(adminAccount, "admin")
+    // TODO: not sure why breaks
+    // privateGroup.addMember(adminAccount, "admin")
   }
 }

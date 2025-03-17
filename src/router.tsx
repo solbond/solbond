@@ -17,6 +17,7 @@ export function createRouter() {
   return routerWithQueryClient(
     createTanStackRouter({
       routeTree,
+      defaultSsr: false,
       context: { queryClient },
       defaultPreload: "intent",
       // react-query will handle data fetching & caching

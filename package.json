@@ -18,6 +18,8 @@
     "@tanstack/react-start": "^1.114.19",
     "@vitejs/plugin-react": "^4.3.4",
     "better-auth": "^1.2.4",
+    "jazz-react-auth-cloudauth": "link:jazz-react-auth-cloudauth",
+    "jazz-auth-cloudauth": "link:jazz-auth-cloudauth",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.5.0",

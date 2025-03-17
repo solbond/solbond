@@ -16,6 +16,8 @@ import { Route as AppIndexImport } from './routes/_app/index'
 import { Route as AppNewImport } from './routes/_app/new'
 import { Route as AppAuthImport } from './routes/_app/auth'
 import { Route as AppProfileIndexImport } from './routes/_app/profile/index'
+import { Route as AppTestPublicImport } from './routes/_app/test/public'
+import { Route as AppTestPrivatePageImport } from './routes/_app/test/privatePage'
 import { Route as AppProfileNewImport } from './routes/_app/profile/new'
 import { Route as AppProfileAuthImport } from './routes/_app/profile/auth'
 import { Route as AppProfileprofileIdProductproductIdImport } from './routes/_app/profile/:profileId/product/:productId'
@@ -48,6 +50,18 @@ const AppAuthRoute = AppAuthImport.update({
 const AppProfileIndexRoute = AppProfileIndexImport.update({
   id: '/profile/',
   path: '/profile/',
+  getParentRoute: () => AppRoute,
+} as any)
+
+const AppTestPublicRoute = AppTestPublicImport.update({
+  id: '/test/public',
+  path: '/test/public',
+  getParentRoute: () => AppRoute,
+} as any)
+
+const AppTestPrivatePageRoute = AppTestPrivatePageImport.update({
+  id: '/test/privatePage',
+  path: '/test/privatePage',
   getParentRoute: () => AppRoute,
 } as any)
 
@@ -116,6 +130,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppProfileNewImport
       parentRoute: typeof AppImport
     }
+    '/_app/test/privatePage': {
+      id: '/_app/test/privatePage'
+      path: '/test/privatePage'
+      fullPath: '/test/privatePage'
+      preLoaderRoute: typeof AppTestPrivatePageImport
+      parentRoute: typeof AppImport
+    }
+    '/_app/test/public': {
+      id: '/_app/test/public'
+      path: '/test/public'
+      fullPath: '/test/public'
+      preLoaderRoute: typeof AppTestPublicImport
+      parentRoute: typeof AppImport
+    }
     '/_app/profile/': {
       id: '/_app/profile/'
       path: '/profile'
@@ -141,6 +169,8 @@ interface AppRouteChildren {
   AppIndexRoute: typeof AppIndexRoute
   AppProfileAuthRoute: typeof AppProfileAuthRoute
   AppProfileNewRoute: typeof AppProfileNewRoute
+  AppTestPrivatePageRoute: typeof AppTestPrivatePageRoute
+  AppTestPublicRoute: typeof AppTestPublicRoute
   AppProfileIndexRoute: typeof AppProfileIndexRoute
   AppProfileprofileIdProductproductIdRoute: typeof AppProfileprofileIdProductproductIdRoute
 }
@@ -151,6 +181,8 @@ const AppRouteChildren: AppRouteChildren = {
   AppIndexRoute: AppIndexRoute,
   AppProfileAuthRoute: AppProfileAuthRoute,
   AppProfileNewRoute: AppProfileNewRoute,
+  AppTestPrivatePageRoute: AppTestPrivatePageRoute,
+  AppTestPublicRoute: AppTestPublicRoute,
   AppProfileIndexRoute: AppProfileIndexRoute,
   AppProfileprofileIdProductproductIdRoute:
     AppProfileprofileIdProductproductIdRoute,
@@ -165,6 +197,8 @@ export interface FileRoutesByFullPath {
   '/': typeof AppIndexRoute
   '/profile/auth': typeof AppProfileAuthRoute
   '/profile/new': typeof AppProfileNewRoute
+  '/test/privatePage': typeof AppTestPrivatePageRoute
+  '/test/public': typeof AppTestPublicRoute
   '/profile': typeof AppProfileIndexRoute
   '/profile/:profileId/product/:productId': typeof AppProfileprofileIdProductproductIdRoute
 }
@@ -175,6 +209,8 @@ export interface FileRoutesByTo {
   '/': typeof AppIndexRoute
   '/profile/auth': typeof AppProfileAuthRoute
   '/profile/new': typeof AppProfileNewRoute
+  '/test/privatePage': typeof AppTestPrivatePageRoute
+  '/test/public': typeof AppTestPublicRoute
   '/profile': typeof AppProfileIndexRoute
   '/profile/:profileId/product/:productId': typeof AppProfileprofileIdProductproductIdRoute
 }
@@ -187,6 +223,8 @@ export interface FileRoutesById {
   '/_app/': typeof AppIndexRoute
   '/_app/profile/auth': typeof AppProfileAuthRoute
   '/_app/profile/new': typeof AppProfileNewRoute
+  '/_app/test/privatePage': typeof AppTestPrivatePageRoute
+  '/_app/test/public': typeof AppTestPublicRoute
   '/_app/profile/': typeof AppProfileIndexRoute
   '/_app/profile/:profileId/product/:productId': typeof AppProfileprofileIdProductproductIdRoute
 }
@@ -200,6 +238,8 @@ export interface FileRouteTypes {
     | '/'
     | '/profile/auth'
     | '/profile/new'
+    | '/test/privatePage'
+    | '/test/public'
     | '/profile'
     | '/profile/:profileId/product/:productId'
   fileRoutesByTo: FileRoutesByTo
@@ -209,6 +249,8 @@ export interface FileRouteTypes {
     | '/'
     | '/profile/auth'
     | '/profile/new'
+    | '/test/privatePage'
+    | '/test/public'
     | '/profile'
     | '/profile/:profileId/product/:productId'
   id:
@@ -219,6 +261,8 @@ export interface FileRouteTypes {
     | '/_app/'
     | '/_app/profile/auth'
     | '/_app/profile/new'
+    | '/_app/test/privatePage'
+    | '/_app/test/public'
     | '/_app/profile/'
     | '/_app/profile/:profileId/product/:productId'
   fileRoutesById: FileRoutesById
@@ -253,6 +297,8 @@ export const routeTree = rootRoute
         "/_app/",
         "/_app/profile/auth",
         "/_app/profile/new",
+        "/_app/test/privatePage",
+        "/_app/test/public",
         "/_app/profile/",
         "/_app/profile/:profileId/product/:productId"
       ]
@@ -275,6 +321,14 @@ export const routeTree = rootRoute
     },
     "/_app/profile/new": {
       "filePath": "_app/profile/new.tsx",
+      "parent": "/_app"
+    },
+    "/_app/test/privatePage": {
+      "filePath": "_app/test/privatePage.tsx",
+      "parent": "/_app"
+    },
+    "/_app/test/public": {
+      "filePath": "_app/test/public.tsx",
       "parent": "/_app"
     },
     "/_app/profile/": {

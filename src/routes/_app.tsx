@@ -1,7 +1,8 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router"
 import { JazzInspector } from "jazz-inspector"
-import { JazzProvider, PasskeyAuthBasicUI } from "jazz-react"
+import { JazzProvider } from "jazz-react"
 import { JazzAccount } from "~/jazz/schema"
+import { CloudAuthBasicUI } from "jazz-react-auth-cloudauth"
 
 export const APPLICATION_NAME = "SolBond"
 
@@ -21,7 +22,11 @@ function LayoutComponent() {
         }}
         AccountSchema={JazzAccount}
       >
-        <PasskeyAuthBasicUI appName="SolBond">
+        <CloudAuthBasicUI
+          appName="SolBond"
+          baseUrl="http://localhost:3010"
+          keyserver="http://localhost:6189"
+        >
           <main className="min-h-screen flex flex-col">
             <div className="flex flex-col min-h-screen w-full pt-14">
               <div className="flex flex-1 w-full">
@@ -32,7 +37,7 @@ function LayoutComponent() {
           <div className="hidden">
             <JazzInspector />
           </div>
-        </PasskeyAuthBasicUI>
+        </CloudAuthBasicUI>
       </JazzProvider>
     </>
   )
