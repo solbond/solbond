@@ -1,9 +1,7 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router"
-import { JazzProvider, PasskeyAuthBasicUI } from "jazz-react"
-import { HeroRoute } from "~/components/Hero/HeroRoute"
-import { Nav } from "~/components/Nav/Nav"
-import { JazzAccount } from "~/jazz/schema"
 import { JazzInspector } from "jazz-inspector"
+import { JazzProvider, PasskeyAuthBasicUI } from "jazz-react"
+import { JazzAccount } from "~/jazz/schema"
 
 export const APPLICATION_NAME = "SolBond"
 
