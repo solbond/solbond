@@ -5,8 +5,7 @@ import { Nav } from "~/components/Nav/Nav"
 import { JazzAccount } from "~/jazz/schema"
 import { JazzInspector } from "jazz-inspector"
 
-// We use this to identify the app in the passkey auth
-export const APPLICATION_NAME = "Issue Tracker"
+export const APPLICATION_NAME = "SolBond"
 
 declare module "jazz-react" {
   export interface Register {
@@ -20,11 +19,11 @@ function LayoutComponent() {
       <JazzProvider
         sync={{
           peer: "wss://cloud.jazz.tools/?key=jazz@solbond.co",
-          when: "signedUp", // makes users who have not signed up, store data only locally
+          when: "signedUp", // users who have not signed up, store data locally
         }}
         AccountSchema={JazzAccount}
       >
-        <PasskeyAuthBasicUI appName="Issue Tracker">
+        <PasskeyAuthBasicUI appName="SolBond">
           <main className="min-h-screen flex flex-col">
             <div className="flex flex-col min-h-screen w-full pt-14">
               <div className="flex flex-1 w-full">
