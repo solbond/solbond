@@ -1,30 +1,11 @@
-import { useRouter } from "@tanstack/react-router"
 import { motion } from "framer-motion"
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
   SearchIcon,
   ShoppingBagIcon,
-  ThumbsUpIcon,
 } from "lucide-react"
-// import { signOut } from "firebase/auth"
-// import { useAuth } from "~/context/FirebaseContext"
-import { Link } from "@tanstack/react-router"
 import { useEffect, useState } from "react"
-import { useProfiles } from "~/context/ProfileContext"
-import Arrow from "../../../public/svg/arrow"
-import Follow from "../../../public/svg/follow"
-
-const USERS = [
-  {
-    name: "John Doe",
-    image: "https://api.multiavatar.com/JohnDoe.svg",
-  },
-  {
-    name: "John Doe",
-    image: "https://api.multiavatar.com/JaneSmith.svg",
-  },
-]
 
 const PRODUCTS = [
   {
@@ -77,23 +58,16 @@ const CATEGORIES = [
 ]
 
 export const HeroRoute = () => {
-  const router = useRouter()
-  // const { user } = useAuth()
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isExiting, setIsExiting] = useState(false)
+  const [isExiting] = useState(false)
   const [windowWidth, setWindowWidth] = useState(0)
-  const { otherProfiles } = useProfiles()
-  const johnDoe = otherProfiles[0] // John Doe's profile
 
   useEffect(() => {
     setWindowWidth(window.innerWidth)
-
     const handleResize = () => {
       setWindowWidth(window.innerWidth)
     }
-
     window.addEventListener("resize", handleResize)
-
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
@@ -105,13 +79,13 @@ export const HeroRoute = () => {
     setCurrentIndex((prev) => (prev - 2 < 0 ? CATEGORIES.length - 2 : prev - 2))
   }
 
-  const handleGetStarted = async () => {
-    setIsExiting(true)
-    await new Promise((resolve) => setTimeout(resolve, 800))
-    document.body.style.overflow = "hidden"
-    localStorage.setItem("transitionState", "entering")
-    router.navigate({ to: "/auth" })
-  }
+  // const handleGetStarted = async () => {
+  //   setIsExiting(true)
+  //   await new Promise((resolve) => setTimeout(resolve, 800))
+  //   document.body.style.overflow = "hidden"
+  //   localStorage.setItem("transitionState", "entering")
+  //   router.navigate({ to: "/auth" })
+  // }
 
   return (
     <motion.div
@@ -123,7 +97,6 @@ export const HeroRoute = () => {
       className="flex flex-col mt-10 p-4 sm:flex-row pt-[82px] gap-6 w-full relative min-h-screen "
     >
       <div className="absolute inset-0 neon-grid"></div>
-
       <div className="w-full relative z-10 flex flex-col gap-2">
         <div className="w-full flex flex-col gap-2 order-1">
           <div className="flex flex-col items-center relative justify-center p-4 leading-tight">
@@ -134,7 +107,7 @@ export const HeroRoute = () => {
               className="text-3xl lg:text-[84px] font-pressStart font-thin bg-clip-text flex"
             >
               {Array.from("SolBond").map((letter, index) => (
-                <span key={index} className="relative">
+                <span key={`${letter}-${index}`} className="relative">
                   <motion.span
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -170,16 +143,16 @@ export const HeroRoute = () => {
               // }
             >
               {/* {user ? ( */}
-              {true ? (
+              {/* {true ? (
                 <motion.div
                   initial={{ width: "36px", scale: 0 }}
                   animate={{ width: "140px", scale: 1 }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative border border-emerald-500/50 bg-black/5 dark:bg-black/40 backdrop-blur-sm overflow-hidden justify-end whitespace-nowrap dark:text-emerald-400 h-[44px] font-mono font-semibold rounded-full px-4 py-2 flex gap-2 items-center transition-all group"
+                  className="relative border border-emerald-500/50 bg-black/5 dark:bg-black/40 backdrop-blur-xs overflow-hidden justify-end whitespace-nowrap dark:text-emerald-400 h-[44px] font-mono font-semibold rounded-full px-4 py-2 flex gap-2 items-center transition-all group"
                 >
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-cyan-500/10 to-blue-500/10 dark:from-emerald-500/20 dark:via-cyan-500/20 dark:to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute inset-0 bg-linear-to-r from-emerald-500/10 via-cyan-500/10 to-blue-500/10 dark:from-emerald-500/20 dark:via-cyan-500/20 dark:to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                   />
@@ -211,7 +184,7 @@ export const HeroRoute = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={handleGetStarted}
-                  className="relative border border-emerald-500/50 bg-inherit dark:bg-black/40 backdrop-blur-sm overflow-hidden justify-end whitespace-nowrap dark:text-emerald-400 h-[44px] font-mono font-semibold rounded-full px-4 py-2 flex gap-2 items-center transition-all group cursor-pointer"
+                  className="relative border border-emerald-500/50 bg-inherit dark:bg-black/40 backdrop-blur-xs overflow-hidden justify-end whitespace-nowrap dark:text-emerald-400 h-[44px] font-mono font-semibold rounded-full px-4 py-2 flex gap-2 items-center transition-all group cursor-pointer"
                 >
                   <motion.div
                     className="absolute inset-0 bg-inherit opacity-0 group-hover:opacity-100 transition-opacity"
@@ -238,7 +211,7 @@ export const HeroRoute = () => {
                     </div>
                   </motion.div>
                 </motion.div>
-              )}
+              )} */}
             </motion.button>
           </div>
 
@@ -256,7 +229,7 @@ export const HeroRoute = () => {
                 </span>
               </span>
               <motion.div
-                className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-emerald-500 via-cyan-500 to-[var(--neon-cyan)]"
+                className="absolute -bottom-2 left-0 w-full h-[2px] bg-linear-to-r from-emerald-500 via-cyan-500 to-[var(--neon-cyan)]"
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 1, delay: 1.5 }}
@@ -292,9 +265,9 @@ export const HeroRoute = () => {
                       ease: [0.6, 0.01, -0.05, 0.95],
                     }}
                     className={`absolute bottom-0 right-0
-                      bg-gradient-to-br from-emerald-500/5 via-cyan-500/5 to-blue-500/5
+                      bg-linear-to-br from-emerald-500/5 via-cyan-500/5 to-blue-500/5
                       dark:from-emerald-500/10 dark:via-cyan-500/10 dark:to-blue-500/10
-                      rounded-2xl backdrop-blur-sm`}
+                      rounded-2xl backdrop-blur-xs`}
                     style={{
                       width: `${size}px`,
                       height: `${size}px`,
@@ -319,13 +292,15 @@ export const HeroRoute = () => {
               <div className="flex gap-1">
                 <button
                   onClick={prevSlide}
-                  className="p-1 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  className="p-1 rounded-xs hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  type="button"
                 >
                   <ChevronLeftIcon className="w-5 h-5" />
                 </button>
                 <button
                   onClick={nextSlide}
-                  className="p-1 rounded-sm hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  className="p-1 rounded-xs hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  type="button"
                 >
                   <ChevronRightIcon className="w-5 h-5" />
                 </button>
@@ -342,15 +317,15 @@ export const HeroRoute = () => {
                 <motion.div
                   key={`${category.title}-${index}`}
                   className="group relative overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800
-                    bg-gradient-to-br from-black/5 via-black/0 to-black/5
+                    bg-linear-to-br from-black/5 via-black/0 to-black/5
                     dark:from-white/5 dark:via-white/0 dark:to-white/5
-                    backdrop-blur-sm shadow-lg hover:shadow-2xl
+                    backdrop-blur-xs shadow-lg hover:shadow-2xl
                     transition-all duration-300
                     min-w-[calc(50%-0.5rem)] md:min-w-0 w-full snap-start"
                 >
                   <div className="aspect-square overflow-hidden">
                     <div className="relative h-full w-full">
-                      <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/60 z-10" />
+                      <div className="absolute inset-0 bg-linear-to-b from-black/0 via-black/0 to-black/60 z-10" />
                       <img
                         src={category.image}
                         alt=""
@@ -376,7 +351,7 @@ export const HeroRoute = () => {
 
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent
+                      className="absolute inset-0 bg-linear-to-r from-transparent via-white/5 to-transparent
                       dark:via-white/10 transform -translate-x-full group-hover:translate-x-full transition-transform
                       duration-1000"
                     />
@@ -398,7 +373,7 @@ export const HeroRoute = () => {
             <input
               type="text"
               placeholder="Explore"
-              className="w-full bg-transparent outline-none text-gray-800 dark:text-white monospace"
+              className="w-full bg-transparent outline-hidden text-gray-800 dark:text-white monospace"
             />
           </div>
           <div className="flex flex-wrap justify-center items-center gap-2 mt-4 relative z-20 order-2">
@@ -417,7 +392,7 @@ export const HeroRoute = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {[johnDoe].map((profile, index) => (
+          {/* {[johnDoe].map((profile, index) => (
             <Link
               key={index}
               to="/profile"
@@ -467,7 +442,7 @@ export const HeroRoute = () => {
                 </div>
               </div>
             </Link>
-          ))}
+          ))} */}
         </div>
 
         <h2 className="text-sm font-sans tracking-[0.2em] uppercase font-semibold text-gray-800 dark:text-gray-200">
@@ -597,7 +572,7 @@ export const HeroRoute = () => {
                         alt={`NFT #${product.id}`}
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent dark:to-black/90 to-white/20 pointer-events-none" />
+                      <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent dark:to-black/90 to-white/20 pointer-events-none" />
                     </div>
                   </div>
                   <div className="p-4 sm:p-3 space-y-3 sm:space-y-2">

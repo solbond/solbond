@@ -12,7 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as AppImport } from './routes/_app'
-import { Route as AppRouteImport } from './routes/_app/route'
+import { Route as AppIndexImport } from './routes/_app/index'
 import { Route as AppNewImport } from './routes/_app/new'
 import { Route as AppAuthImport } from './routes/_app/auth'
 import { Route as AppProfileIndexImport } from './routes/_app/profile/index'
@@ -27,9 +27,10 @@ const AppRoute = AppImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const AppRouteRoute = AppRouteImport.update({
-  id: '/_app',
-  getParentRoute: () => rootRoute,
+const AppIndexRoute = AppIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
 } as any)
 
 const AppNewRoute = AppNewImport.update({
@@ -77,13 +78,6 @@ declare module '@tanstack/react-router' {
       id: '/_app'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof AppRouteImport
-      parentRoute: typeof rootRoute
-    }
-    '/_app': {
-      id: '/_app'
-      path: ''
-      fullPath: ''
       preLoaderRoute: typeof AppImport
       parentRoute: typeof rootRoute
     }
@@ -99,6 +93,13 @@ declare module '@tanstack/react-router' {
       path: '/new'
       fullPath: '/new'
       preLoaderRoute: typeof AppNewImport
+      parentRoute: typeof AppImport
+    }
+    '/_app/': {
+      id: '/_app/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof AppIndexImport
       parentRoute: typeof AppImport
     }
     '/_app/profile/auth': {
@@ -137,6 +138,7 @@ declare module '@tanstack/react-router' {
 interface AppRouteChildren {
   AppAuthRoute: typeof AppAuthRoute
   AppNewRoute: typeof AppNewRoute
+  AppIndexRoute: typeof AppIndexRoute
   AppProfileAuthRoute: typeof AppProfileAuthRoute
   AppProfileNewRoute: typeof AppProfileNewRoute
   AppProfileIndexRoute: typeof AppProfileIndexRoute
@@ -146,6 +148,7 @@ interface AppRouteChildren {
 const AppRouteChildren: AppRouteChildren = {
   AppAuthRoute: AppAuthRoute,
   AppNewRoute: AppNewRoute,
+  AppIndexRoute: AppIndexRoute,
   AppProfileAuthRoute: AppProfileAuthRoute,
   AppProfileNewRoute: AppProfileNewRoute,
   AppProfileIndexRoute: AppProfileIndexRoute,
@@ -159,6 +162,7 @@ export interface FileRoutesByFullPath {
   '': typeof AppRouteWithChildren
   '/auth': typeof AppAuthRoute
   '/new': typeof AppNewRoute
+  '/': typeof AppIndexRoute
   '/profile/auth': typeof AppProfileAuthRoute
   '/profile/new': typeof AppProfileNewRoute
   '/profile': typeof AppProfileIndexRoute
@@ -166,9 +170,9 @@ export interface FileRoutesByFullPath {
 }
 
 export interface FileRoutesByTo {
-  '': typeof AppRouteWithChildren
   '/auth': typeof AppAuthRoute
   '/new': typeof AppNewRoute
+  '/': typeof AppIndexRoute
   '/profile/auth': typeof AppProfileAuthRoute
   '/profile/new': typeof AppProfileNewRoute
   '/profile': typeof AppProfileIndexRoute
@@ -180,6 +184,7 @@ export interface FileRoutesById {
   '/_app': typeof AppRouteWithChildren
   '/_app/auth': typeof AppAuthRoute
   '/_app/new': typeof AppNewRoute
+  '/_app/': typeof AppIndexRoute
   '/_app/profile/auth': typeof AppProfileAuthRoute
   '/_app/profile/new': typeof AppProfileNewRoute
   '/_app/profile/': typeof AppProfileIndexRoute
@@ -192,15 +197,16 @@ export interface FileRouteTypes {
     | ''
     | '/auth'
     | '/new'
+    | '/'
     | '/profile/auth'
     | '/profile/new'
     | '/profile'
     | '/profile/:profileId/product/:productId'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | ''
     | '/auth'
     | '/new'
+    | '/'
     | '/profile/auth'
     | '/profile/new'
     | '/profile'
@@ -210,6 +216,7 @@ export interface FileRouteTypes {
     | '/_app'
     | '/_app/auth'
     | '/_app/new'
+    | '/_app/'
     | '/_app/profile/auth'
     | '/_app/profile/new'
     | '/_app/profile/'
@@ -218,12 +225,10 @@ export interface FileRouteTypes {
 }
 
 export interface RootRouteChildren {
-  AppRouteRoute: typeof AppRouteRoute
   AppRoute: typeof AppRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  AppRouteRoute: AppRouteRoute,
   AppRoute: AppRouteWithChildren,
 }
 
@@ -237,7 +242,6 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/_app",
         "/_app"
       ]
     },
@@ -246,6 +250,7 @@ export const routeTree = rootRoute
       "children": [
         "/_app/auth",
         "/_app/new",
+        "/_app/",
         "/_app/profile/auth",
         "/_app/profile/new",
         "/_app/profile/",
@@ -258,6 +263,10 @@ export const routeTree = rootRoute
     },
     "/_app/new": {
       "filePath": "_app/new.tsx",
+      "parent": "/_app"
+    },
+    "/_app/": {
+      "filePath": "_app/index.tsx",
       "parent": "/_app"
     },
     "/_app/profile/auth": {

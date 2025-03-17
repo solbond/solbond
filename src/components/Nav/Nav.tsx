@@ -1,22 +1,13 @@
 import { useRouter } from "@tanstack/react-router"
-// import { signOut } from "firebase/auth"
 import { motion } from "framer-motion"
-import { UserIcon, BellIcon, PlusIcon } from "lucide-react"
-// import { useAuth } from "~/context/FirebaseContext"
-import { auth } from "~/lib/firebase"
-import { ArrowRightIcon } from "lucide-react"
+import { UserIcon, PlusIcon } from "lucide-react"
 import { useEffect, useState } from "react"
 import { Link } from "@tanstack/react-router"
-import { useProfiles } from "~/context/ProfileContext"
 
 export const Nav = () => {
   const router = useRouter()
-  // const { user } = useAuth()
   const [isScrolled, setIsScrolled] = useState(false)
-  const { myProfile } = useProfiles()
-
   const isHomeRoute = router.state.location.pathname === "/"
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
@@ -24,7 +15,6 @@ export const Nav = () => {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
-
   return (
     <>
       <motion.div
@@ -60,7 +50,7 @@ export const Nav = () => {
             <Link
               className="flex items-center gap-2"
               to="/profile"
-              search={{ id: myProfile.id }}
+              // search={{ id: myProfile.id }}
             >
               <UserIcon size={18} />
               <span className="text-sm">Profile</span>
@@ -76,16 +66,28 @@ export const Nav = () => {
         className="flex z-[99] justify-center border-b-[1px] bg-white/50 bg-blur-sm dark:bg-black/50 shadow-sm h-[37px] fixed top-0 left-0 right-0 items-center px-6 md:hidden"
       >
         <div className="flex items-center gap-6 md:hidden">
-          <button className="px-3 py-1 uppercase text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-[var(--neon-cyan)] transition-colors">
+          <button
+            className="px-3 py-1 uppercase text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-[var(--neon-cyan)] transition-colors"
+            type="button"
+          >
             Tags
           </button>
-          <button className="px-3 py-1 uppercase text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-[var(--neon-cyan)] transition-colors">
+          <button
+            className="px-3 py-1 uppercase text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-[var(--neon-cyan)] transition-colors"
+            type="button"
+          >
             Contains
           </button>
-          <button className="px-3 py-1 uppercase text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-[var(--neon-cyan)] transition-colors">
+          <button
+            className="px-3 py-1 uppercase text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-[var(--neon-cyan)] transition-colors"
+            type="button"
+          >
             Price
           </button>
-          <button className="px-3 py-1 uppercase text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-[var(--neon-cyan)] transition-colors">
+          <button
+            className="px-3 py-1 uppercase text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-[var(--neon-cyan)] transition-colors"
+            type="button"
+          >
             Trade
           </button>
         </div>
