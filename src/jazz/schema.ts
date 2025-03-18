@@ -46,35 +46,28 @@ export class JazzAccount extends Account {
       return
     }
   }
-
   private async initialMigration(creationProps: {
     name: string
     other?: Record<string, unknown>
   }) {
     const { name, other } = creationProps
-
     const adminAccount = (await Account.load(
       "co_zAsBcQzQzhcrK6TYhV7RmmGXZRD" as ID<Account>,
       this,
       {},
     )) as Account
-    console.log(adminAccount, "admin")
-
     const profileErrors = UserProfile.validate({ name, ...other })
     if (profileErrors.errors.length > 0) {
       throw new Error(
         `Invalid profile data: ${profileErrors.errors.join(", ")}`,
       )
     }
-
     const publicGroup = Group.create({ owner: this })
     publicGroup.addMember("everyone", "reader")
-
     this.profile = UserProfile.create(
       { name, ...other },
       { owner: publicGroup },
     )
-
     const privateGroup = Group.create({ owner: this })
     this.root = AccountRoot.create(
       {
@@ -86,7 +79,6 @@ export class JazzAccount extends Account {
       },
       { owner: this },
     )
-    // TODO: not sure why breaks
-    // privateGroup.addMember(adminAccount, "admin")
+    privateGroup.addMember(adminAccount, "admin")
   }
 }
