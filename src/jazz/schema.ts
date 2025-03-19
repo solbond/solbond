@@ -1,4 +1,7 @@
 import { Account, CoList, CoMap, Group, ID, Profile, co } from "jazz-tools"
+import { RawCoID } from "cojson"
+
+export class GlobalContainer extends CoList.Of(co.json<RawCoID>()) {}
 
 export class Product extends CoMap {
   name = co.string
@@ -51,11 +54,16 @@ export class JazzAccount extends Account {
     other?: Record<string, unknown>
   }) {
     const { name, other } = creationProps
-    const adminAccount = (await Account.load(
-      "co_zAsBcQzQzhcrK6TYhV7RmmGXZRD" as ID<Account>,
+    const inspectorAccount = (await Account.load(
+      "co_z8RGrfLuK3mmWUgY4irm62cECVd" as ID<Account>,
       this,
       {},
     )) as Account
+    const globalContainer = await GlobalContainer.load(
+      "co_z8RGrfLuK3mmWUgY4irm62cECVd" as ID<GlobalContainer>,
+      this,
+      [],
+    )
     const profileErrors = UserProfile.validate({ name, ...other })
     if (profileErrors.errors.length > 0) {
       throw new Error(
@@ -77,8 +85,12 @@ export class JazzAccount extends Account {
         }),
         version: 0,
       },
-      { owner: this },
+      { owner: privateGroup },
     )
-    privateGroup.addMember(adminAccount, "admin")
+    privateGroup.addMember(inspectorAccount, "reader")
+    if (!globalContainer) {
+      throw new Error("Global container not found")
+    }
+    globalContainer.push(this.root._raw.id)
   }
 }
