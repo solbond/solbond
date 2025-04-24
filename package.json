@@ -8,6 +8,7 @@
     "serve": "blade serve"
   },
   "dependencies": {
+    "@ronin/better-auth": "^1.0.0",
     "@ronin/blade": "0.1.45",
     "@tailwindcss/cli": "4.1.4",
     "@types/react": "^19.1.2",

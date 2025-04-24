@@ -24,3 +24,5 @@ past*
 past/
 *.log
 private
+
+.blade
