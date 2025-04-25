@@ -1,0 +1,290 @@
+import { add, alter, create, drop, get, set } from "ronin";
+
+export default () => [
+  drop.model("file"),
+  drop.model("product"),
+  create.model({
+    slug: "RONIN_TEMP_user",
+    fields: {
+      email: { required: true, unique: true, type: "string" },
+      emailVerified: { required: true, type: "boolean" },
+      image: { type: "blob" },
+      name: { required: true, type: "string" },
+    },
+  }),
+  add.RONIN_TEMP_user.with(() => get.user({ selecting: ["email", "emailVerified", "image", "name"] })),
+  drop.model("user"),
+  alter.model("RONIN_TEMP_user").to({ slug: "user", name: "User", pluralName: "Users" }),
+  create.model({
+    slug: "RONIN_TEMP_user",
+    fields: {
+      email: { required: true, unique: true, type: "string" },
+      emailVerified: { required: true, type: "boolean" },
+      image: { type: "blob" },
+      name: { required: true, type: "string" },
+    },
+  }),
+  add.RONIN_TEMP_user.with(() => get.user()),
+  drop.model("user"),
+  alter.model("RONIN_TEMP_user").to({ slug: "user", name: "User", pluralName: "Users" }),
+  create.model({
+    slug: "RONIN_TEMP_user",
+    fields: {
+      email: { required: false, unique: true, type: "string" },
+      emailVerified: { required: false, type: "boolean" },
+      image: { type: "blob", required: false },
+      name: { required: false, type: "string" },
+    },
+  }),
+  add.RONIN_TEMP_user.with(() =>
+    get.user({
+      selecting: [
+        "email",
+        "username",
+        "verifiedCreator",
+        "bio",
+        "name",
+        "image",
+        "createdAt",
+        "updatedAt",
+        "emailVerified",
+      ],
+    })
+  ),
+  set.RONIN_TEMP_user.to({ emailVerified: true }),
+  alter.model("RONIN_TEMP_user").alter.field("emailVerified").to({ required: true }),
+  drop.model("user"),
+  alter.model("RONIN_TEMP_user").to({ slug: "user", name: "User", pluralName: "Users" }),
+  alter.model("user").create.field({ slug: "RONIN_TEMP_image", type: "blob" }),
+  set.user.to.RONIN_TEMP_image(f => f.image),
+  alter.model("user").drop.field("image"),
+  alter.model("user").alter.field("RONIN_TEMP_image").to({ slug: "image" }),
+  create.model({
+    slug: "RONIN_TEMP_user",
+    fields: {
+      email: { required: false, unique: true, type: "string" },
+      emailVerified: { required: false, type: "boolean" },
+      image: { type: "blob", required: false },
+      name: { required: false, type: "string" },
+    },
+  }),
+  add.RONIN_TEMP_user.with(() =>
+    get.user({
+      selecting: [
+        "email",
+        "username",
+        "verifiedCreator",
+        "bio",
+        "name",
+        "image",
+        "createdAt",
+        "updatedAt",
+        "emailVerified",
+      ],
+    })
+  ),
+  set.RONIN_TEMP_user.to({ name: "" }),
+  alter.model("RONIN_TEMP_user").alter.field("name").to({ required: true }),
+  drop.model("user"),
+  alter.model("RONIN_TEMP_user").to({ slug: "user", name: "User", pluralName: "Users" }),
+  create.model({
+    slug: "RONIN_TEMP_account",
+    fields: {
+      userId: { required: true, target: "user", type: "link" },
+      accessToken: { type: "string" },
+      accessTokenExpiresAt: { type: "date" },
+      accountId: { required: true, type: "string" },
+      idToken: { type: "string" },
+      password: { type: "string" },
+      providerId: { required: true, type: "string" },
+      refreshToken: { type: "string" },
+      refreshTokenExpiresAt: { type: "date" },
+      scope: { type: "string" },
+    },
+  }),
+  add.RONIN_TEMP_account.with(() => get.account()),
+  alter.model("RONIN_TEMP_account").alter.field("userId").to({ slug: "user" }),
+  drop.model("account"),
+  alter.model("RONIN_TEMP_account").to({ slug: "account", name: "Account", pluralName: "Accounts" }),
+  alter.model("account").drop.field("createdAt"),
+  alter.model("account").drop.field("updatedAt"),
+  create.model({
+    slug: "RONIN_TEMP_account",
+    fields: {
+      accessToken: { type: "string", required: false },
+      accessTokenExpiresAt: { type: "date", required: false },
+      accountId: { required: false, type: "string" },
+      idToken: { type: "string", required: false },
+      password: { type: "string", required: false },
+      providerId: { required: false, type: "string" },
+      refreshToken: { type: "string", required: false },
+      refreshTokenExpiresAt: { type: "date", required: false },
+      scope: { type: "string", required: false },
+      user: { required: false, target: "user", type: "link" },
+    },
+  }),
+  add.RONIN_TEMP_account.with(() =>
+    get.account({
+      selecting: [
+        "userId",
+        "accountId",
+        "providerId",
+        "accessToken",
+        "refreshToken",
+        "accessTokenExpiresAt",
+        "refreshTokenExpiresAt",
+        "scope",
+        "idToken",
+        "password",
+        "createdAt",
+        "updatedAt",
+      ],
+    })
+  ),
+  set.RONIN_TEMP_account.to({ accountId: "" }),
+  alter.model("RONIN_TEMP_account").alter.field("accountId").to({ required: true }),
+  drop.model("account"),
+  alter.model("RONIN_TEMP_account").to({ slug: "account", name: "Account", pluralName: "Accounts" }),
+  create.model({
+    slug: "RONIN_TEMP_account",
+    fields: {
+      accessToken: { type: "string", required: false },
+      accessTokenExpiresAt: { type: "date", required: false },
+      accountId: { required: false, type: "string" },
+      idToken: { type: "string", required: false },
+      password: { type: "string", required: false },
+      providerId: { required: false, type: "string" },
+      refreshToken: { type: "string", required: false },
+      refreshTokenExpiresAt: { type: "date", required: false },
+      scope: { type: "string", required: false },
+      user: { required: false, target: "user", type: "link" },
+    },
+  }),
+  add.RONIN_TEMP_account.with(() =>
+    get.account({
+      selecting: [
+        "userId",
+        "accountId",
+        "providerId",
+        "accessToken",
+        "refreshToken",
+        "accessTokenExpiresAt",
+        "refreshTokenExpiresAt",
+        "scope",
+        "idToken",
+        "password",
+        "createdAt",
+        "updatedAt",
+      ],
+    })
+  ),
+  set.RONIN_TEMP_account.to({ providerId: "" }),
+  alter.model("RONIN_TEMP_account").alter.field("providerId").to({ required: true }),
+  drop.model("account"),
+  alter.model("RONIN_TEMP_account").to({ slug: "account", name: "Account", pluralName: "Accounts" }),
+  create.model({
+    slug: "RONIN_TEMP_session",
+    fields: {
+      userId: { required: true, target: "user", type: "link" },
+      expiresAt: { required: true, type: "date" },
+      ipAddress: { type: "string" },
+      token: { required: true, unique: true, type: "string" },
+      userAgent: { type: "string" },
+    },
+  }),
+  add.RONIN_TEMP_session.with(() => get.session()),
+  alter.model("RONIN_TEMP_session").alter.field("userId").to({ slug: "user" }),
+  drop.model("session"),
+  alter.model("RONIN_TEMP_session").to({ slug: "session", name: "Session", pluralName: "Sessions" }),
+  alter.model("session").drop.field("createdAt"),
+  alter.model("session").drop.field("updatedAt"),
+  create.model({
+    slug: "RONIN_TEMP_session",
+    fields: {
+      expiresAt: { required: false, type: "date" },
+      ipAddress: { type: "string", required: false },
+      token: { required: false, unique: true, type: "string" },
+      user: { required: false, target: "user", type: "link" },
+      userAgent: { type: "string", required: false },
+    },
+  }),
+  add.RONIN_TEMP_session.with(() =>
+    get.session({ selecting: ["userId", "token", "expiresAt", "ipAddress", "userAgent", "createdAt", "updatedAt"] })
+  ),
+  set.RONIN_TEMP_session.to({ expiresAt: "" }),
+  alter.model("RONIN_TEMP_session").alter.field("expiresAt").to({ required: true }),
+  drop.model("session"),
+  alter.model("RONIN_TEMP_session").to({ slug: "session", name: "Session", pluralName: "Sessions" }),
+  create.model({
+    slug: "RONIN_TEMP_session",
+    fields: {
+      expiresAt: { required: true, type: "date" },
+      ipAddress: { type: "string" },
+      token: { required: true, unique: true, type: "string" },
+      user: { required: true, target: "user", type: "link" },
+      userAgent: { type: "string" },
+    },
+  }),
+  add.RONIN_TEMP_session.with(() => get.session()),
+  drop.model("session"),
+  alter.model("RONIN_TEMP_session").to({ slug: "session", name: "Session", pluralName: "Sessions" }),
+  alter.model("verification").drop.field("createdAt"),
+  alter.model("verification").drop.field("updatedAt"),
+  create.model({
+    slug: "RONIN_TEMP_verification",
+    fields: {
+      expiresAt: { required: false, type: "date" },
+      identifier: { required: false, type: "string" },
+      value: { required: false, type: "string" },
+    },
+  }),
+  add.RONIN_TEMP_verification.with(() =>
+    get.verification({ selecting: ["identifier", "value", "expiresAt", "createdAt", "updatedAt"] })
+  ),
+  set.RONIN_TEMP_verification.to({ expiresAt: "" }),
+  alter.model("RONIN_TEMP_verification").alter.field("expiresAt").to({ required: true }),
+  drop.model("verification"),
+  alter.model("RONIN_TEMP_verification").to({
+    slug: "verification",
+    name: "Verification",
+    pluralName: "Verifications",
+  }),
+  create.model({
+    slug: "RONIN_TEMP_verification",
+    fields: {
+      expiresAt: { required: false, type: "date" },
+      identifier: { required: false, type: "string" },
+      value: { required: false, type: "string" },
+    },
+  }),
+  add.RONIN_TEMP_verification.with(() =>
+    get.verification({ selecting: ["identifier", "value", "expiresAt", "createdAt", "updatedAt"] })
+  ),
+  set.RONIN_TEMP_verification.to({ identifier: "" }),
+  alter.model("RONIN_TEMP_verification").alter.field("identifier").to({ required: true }),
+  drop.model("verification"),
+  alter.model("RONIN_TEMP_verification").to({
+    slug: "verification",
+    name: "Verification",
+    pluralName: "Verifications",
+  }),
+  create.model({
+    slug: "RONIN_TEMP_verification",
+    fields: {
+      expiresAt: { required: false, type: "date" },
+      identifier: { required: false, type: "string" },
+      value: { required: false, type: "string" },
+    },
+  }),
+  add.RONIN_TEMP_verification.with(() =>
+    get.verification({ selecting: ["identifier", "value", "expiresAt", "createdAt", "updatedAt"] })
+  ),
+  set.RONIN_TEMP_verification.to({ value: "" }),
+  alter.model("RONIN_TEMP_verification").alter.field("value").to({ required: true }),
+  drop.model("verification"),
+  alter.model("RONIN_TEMP_verification").to({
+    slug: "verification",
+    name: "Verification",
+    pluralName: "Verifications",
+  }),
+];

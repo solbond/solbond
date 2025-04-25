@@ -16,13 +16,12 @@ yarn.lock
 *.bike
 *.db
 .repo_ignore
-x.*
-x/
-x-*
+i.*
+i-*
+internal/
 past-*
 past*
 past/
 *.log
 private
-
 .blade
