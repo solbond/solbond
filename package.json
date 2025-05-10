@@ -14,11 +14,10 @@
   "dependencies": {
     "@ronin/better-auth": "^1.0.0",
     "@ronin/blade": "0.1.45",
-    "@tailwindcss/cli": "4.1.4",
     "@types/react": "^19.1.2",
     "react": "0.0.0-experimental-df12d7eac-20230510",
     "react-dom": "0.0.0-experimental-df12d7eac-20230510",
-    "tailwindcss": "4.1.4"
+    "tailwindcss": "3.4.11"
   },
   "prettier": {
     "semi": false
