@@ -6,7 +6,7 @@
     "dev": "blade",
     "build": "blade build",
     "serve": "blade serve",
-    "db:migrate": "bunx ronin diff ronin/ronin-schema.ts && bunx ronin apply",
+    "db:migrate": "bunx ronin diff ronin/ronin-schema.ts",
     "db:migrate-create": "bunx ronin diff ronin/ronin-schema.ts",
     "db:apply-migration": "bunx ronin apply",
     "db:types": "bunx ronin types"
