@@ -1,7 +1,8 @@
 "use client"
 
-import Sidebar from "../components/Sidebar"
-import Main from "../components/Main"
+import Sidebar from "../components/sidebar"
+import Main from "../components/main"
+
 const Page = () => {
   return (
     <div className="w-full py-4 px-2 flex flex-row h-screen bg-[#0f0f0f]">
