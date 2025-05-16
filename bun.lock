@@ -7,7 +7,7 @@
         "@radix-ui/react-dropdown-menu": "2.1.14",
         "@radix-ui/react-slot": "1.2.2",
         "@ronin/better-auth": "1.0.0",
-        "@ronin/blade": "0.5.4-hono-experimental-365",
+        "@ronin/blade": "0.6.0",
         "@types/react": "19.1.2",
         "add": "2.0.6",
         "class-variance-authority": "0.7.1",
@@ -228,7 +228,7 @@
 
     "@ronin/better-auth": ["@ronin/better-auth@1.0.0", "", { "peerDependencies": { "better-auth": ">=1.2.5", "ronin": ">=6.4.16" } }, "sha512-XxaQkVSs4xzb9cmPQSOPDODsjczBZyQvG1srYbiabqYmAgtcDDIg9DZwdqb79g/xOGJuJ3LugSQH5y+AYlG7AA=="],
 
-    "@ronin/blade": ["@ronin/blade@0.5.4-hono-experimental-365", "", { "dependencies": { "@tailwindcss/node": "4.1.6", "@tailwindcss/oxide": "4.1.6" }, "bin": { "blade": "dist/private/shell/index.js" } }, "sha512-QfL5BkM3B5nuUKgoNiY5foKRyh4cAdDcdq5knkXJnkiRDdr340pOhC9bB3LDXXhOlQHY1ycbaSs2VlK3lKnCMA=="],
+    "@ronin/blade": ["@ronin/blade@0.6.0", "", { "dependencies": { "@tailwindcss/node": "4.1.6", "@tailwindcss/oxide": "4.1.6" }, "bin": { "blade": "dist/private/shell/index.js" } }, "sha512-cSggNvsj4WIzcNfXFJRGOVeBUNO3beurj0IiZjqHNuJZxEyMP3A3rHWLyd1WxXWLsfMZPBSaAXIFyE1QhP+KFA=="],
 
     "@ronin/cli": ["@ronin/cli@0.3.3", "", { "dependencies": { "@dprint/formatter": "0.4.1", "@dprint/typescript": "0.93.3", "@iarna/toml": "2.2.5", "@inquirer/prompts": "7.2.3", "@ronin/engine": "0.1.23", "chalk-template": "1.1.0", "get-port": "7.1.0", "ini": "5.0.0", "json5": "2.2.3", "open": "10.1.0", "ora": "8.1.1", "resolve-from": "5.0.0" } }, "sha512-rbwi+qboAjOeWguARWzlgtclS0TACQtGxqJhJpSeE/1ickzxsQCrfxXpaFPa1Pfq6u3upiVz5xaT0d5VnC3eZg=="],
 
