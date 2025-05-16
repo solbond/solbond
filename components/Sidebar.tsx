@@ -1,5 +1,5 @@
 import { Logo, Notification, Search } from "./Icons"
-import { DropdownMenuCheckboxes } from "./DropMenu"
+import { DropdownMenuCheckboxes } from "./DropMenu.client"
 
 export default function Sidebar() {
   return (
