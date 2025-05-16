@@ -1,6 +1,6 @@
 import { betterAuth } from "better-auth"
 import { ronin } from "@ronin/better-auth"
-import { createSyntaxFactory } from 'ronin';
+import createSyntaxFactory from 'ronin';
 
 const client = createSyntaxFactory({
   token: process.env.BLADE_APP_TOKEN,
