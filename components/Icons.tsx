@@ -13,6 +13,7 @@ export function Logo({ size = 20, className = "" }: IconProps) {
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
+      <title>Logo</title>
       <path
         d="M10.933 0.00574493C13.3106 0.126291 15.2015 2.09228 15.2015 4.49989C15.2015 6.90752 13.3107 8.87348 10.933 8.99403L10.7015 8.99989V-0.000114441L10.933 0.00574493Z"
         fill="white"
@@ -43,6 +44,7 @@ export function Notification({ size = 20, className = "" }: IconProps) {
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
+      <title>Notification</title>
       <g opacity="0.2" clipPath="url(#clip0_10938_1724)">
         <path
           d="M8.55664 17.5C8.70293 17.7533 8.91332 17.9637 9.16668 18.11C9.42003 18.2563 9.70743 18.3333 9.99997 18.3333C10.2925 18.3333 10.5799 18.2563 10.8333 18.11C11.0866 17.9637 11.297 17.7533 11.4433 17.5"
@@ -92,6 +94,7 @@ export function Search({ size = 20, className = "" }: IconProps) {
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
+      <title>Search</title>
       <g opacity="0.2">
         <path
           fillRule="evenodd"
