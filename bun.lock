@@ -7,12 +7,13 @@
         "@radix-ui/react-dropdown-menu": "2.1.14",
         "@radix-ui/react-slot": "1.2.2",
         "@ronin/better-auth": "1.0.0",
-        "@ronin/blade": "0.5.4",
+        "@ronin/blade": "0.5.4-hono-experimental-365",
         "@types/react": "19.1.2",
         "add": "2.0.6",
         "class-variance-authority": "0.7.1",
         "clsx": "2.1.1",
         "dropdown-menu": "0.1.1",
+        "hono": "4.7.9",
         "lib-utils-ts": "0.0.0-test",
         "lucide-react": "0.509.0",
         "react": "0.0.0-experimental-df12d7eac-20230510",
@@ -227,7 +228,7 @@
 
     "@ronin/better-auth": ["@ronin/better-auth@1.0.0", "", { "peerDependencies": { "better-auth": ">=1.2.5", "ronin": ">=6.4.16" } }, "sha512-XxaQkVSs4xzb9cmPQSOPDODsjczBZyQvG1srYbiabqYmAgtcDDIg9DZwdqb79g/xOGJuJ3LugSQH5y+AYlG7AA=="],
 
-    "@ronin/blade": ["@ronin/blade@0.5.4", "", { "dependencies": { "@tailwindcss/node": "4.1.6", "@tailwindcss/oxide": "4.1.6" }, "bin": { "blade": "dist/private/shell/index.js" } }, "sha512-nDQlmgBc+l0fkKU9+st2bFKslabTh6ravczC1rhrt+SU55Bz7XEZyOmMqA5jXDxXo8VORMdFXZUBu/r8yPIiig=="],
+    "@ronin/blade": ["@ronin/blade@0.5.4-hono-experimental-365", "", { "dependencies": { "@tailwindcss/node": "4.1.6", "@tailwindcss/oxide": "4.1.6" }, "bin": { "blade": "dist/private/shell/index.js" } }, "sha512-QfL5BkM3B5nuUKgoNiY5foKRyh4cAdDcdq5knkXJnkiRDdr340pOhC9bB3LDXXhOlQHY1ycbaSs2VlK3lKnCMA=="],
 
     "@ronin/cli": ["@ronin/cli@0.3.3", "", { "dependencies": { "@dprint/formatter": "0.4.1", "@dprint/typescript": "0.93.3", "@iarna/toml": "2.2.5", "@inquirer/prompts": "7.2.3", "@ronin/engine": "0.1.23", "chalk-template": "1.1.0", "get-port": "7.1.0", "ini": "5.0.0", "json5": "2.2.3", "open": "10.1.0", "ora": "8.1.1", "resolve-from": "5.0.0" } }, "sha512-rbwi+qboAjOeWguARWzlgtclS0TACQtGxqJhJpSeE/1ickzxsQCrfxXpaFPa1Pfq6u3upiVz5xaT0d5VnC3eZg=="],
 
@@ -466,6 +467,8 @@
     "graphql": ["graphql@16.11.0", "", {}, "sha512-mS1lbMsxgQj6hge1XZ6p7GPhbrtFwUFYi3wRzXAC/FmYnyXMTvvI3td3rjmQ2u8ewXueaSvRPWaEcgVVOT9Jnw=="],
 
     "headers-polyfill": ["headers-polyfill@4.0.3", "", {}, "sha512-IScLbePpkvO846sIwOtOTDjutRMWdXdJmXdMvk6gCBHxFO8d+QKOQedyZSxFTTFYRSmlgSTDtXqqq4pcenBXLQ=="],
+
+    "hono": ["hono@4.7.9", "", {}, "sha512-/EsCoR5h7N4yu01TDu9GMCCJa6ZLk5ZJIWFFGNawAXmd1Tp53+Wir4xm0D2X19bbykWUlzQG0+BvPAji6p9E8Q=="],
 
     "https-proxy-agent": ["https-proxy-agent@6.2.1", "", { "dependencies": { "agent-base": "^7.0.2", "debug": "4" } }, "sha512-ONsE3+yfZF2caH5+bJlcddtWqNI3Gvs5A38+ngvljxaBiRXRswym2c7yf8UAeFpRFKjFNHIFEHqR/OLAWJzyiA=="],
 
