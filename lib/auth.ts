@@ -1,13 +1,13 @@
 import { betterAuth } from "better-auth"
-import { ronin } from "@ronin/better-auth"
-import createSyntaxFactory from 'ronin';
+import { ronin as roninAdapter } from "@ronin/better-auth"
+import ronin from 'ronin';
 
-const client = createSyntaxFactory({
+const client = ronin({
   token: process.env.BLADE_APP_TOKEN,
 })
 
 export const auth = betterAuth({
-  database: ronin(client),
+  database: roninAdapter(client),
 })
 
 export type AuthType = {
