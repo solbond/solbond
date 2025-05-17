@@ -1,31 +1,27 @@
 import { Logo, Notification, Search } from "./icons"
 import { Dropdown } from "./drop-menu.client"
 import {
-  Columns2,
+  Egg,
   Package,
   WalletCards,
   UsersRound,
-  Activity,
-  DollarSign,
-  Star,
   Settings,
+  Puzzle,
 } from "lucide-react"
 
 const navigationItems = [
-  { href: "/", icon: Columns2, label: "Home" },
+  { href: "/", icon: Egg, label: "Home" },
   { href: "/products", icon: Package, label: "Products" },
-  { href: "/benefits", icon: Star, label: "Benefits" },
-  { href: "/customers", icon: UsersRound, label: "Customers" },
+  { href: "/members", icon: UsersRound, label: "Members" },
+  { href: "/links", icon: Puzzle, label: "Links" },
   { href: "/sales", icon: WalletCards, label: "Sales" },
-  { href: "/analytics", icon: Activity, label: "Analytics" },
-  { href: "/finance", icon: DollarSign, label: "Finance" },
   { href: "/settings", icon: Settings, label: "Settings" },
 ]
 
 export default function Sidebar() {
   return (
-    <div className="w-1/6 flex flex-col p-2 bg-inherit">
-      <div className="flex flex-row justify-between items-center gap-2">
+    <div className="w-1/7 flex flex-col bg-inherit h-full">
+      <div className="px-6 pt-4 pb-6 flex flex-row justify-between items-center">
         <Logo
           size={18}
           className="text-white hover:cursor-pointer hover:opacity-70 transition-all duration-300 ease-in-out"
@@ -41,12 +37,12 @@ export default function Sidebar() {
           />
         </div>
       </div>
-      <nav className="flex flex-col text-white text-sm font-medium gap-2 mt-8">
+      <nav className="flex flex-col text-white text-sm font-medium gap-2 px-6 mt-8">
         {navigationItems.map((item) => (
           <a
             key={item.href}
             href={item.href}
-            className="flex items-center gap-3 px-4 py-2 rounded-lg opacity-70 hover:opacity-90 transition"
+            className="flex items-center gap-4 py-2 rounded-lg opacity-70 hover:opacity-90 transition"
           >
             <item.icon size={14} />
             {item.label}

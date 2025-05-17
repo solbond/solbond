@@ -10,10 +10,10 @@ import {
   PlusCircle,
   ChevronDown,
   ChevronUp,
-  Settings,
   User,
   UserPlus,
   Users,
+  Activity,
 } from "lucide-react"
 
 import {
@@ -66,8 +66,8 @@ export function Dropdown() {
             <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Settings />
-            <span>Settings</span>
+            <Activity />
+            <span>Analytics</span>
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>

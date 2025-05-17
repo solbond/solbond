@@ -5,7 +5,7 @@ const Page = () => {
     <Layout>
       <div className="flex flex-row justify-between items-center">
         <h1 className="text-white text-xl font-normal tracking-wider">
-          Benefits
+          Members
         </h1>
       </div>
     </Layout>
