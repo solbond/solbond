@@ -1,5 +1,5 @@
 import { Logo, Notification, Search } from "./icons"
-import { DropdownMenuCheckboxes } from "./drop-menu.client"
+import { Dropdown } from "./drop-menu.client"
 import {
   Columns2,
   Package,
@@ -54,7 +54,7 @@ export default function Sidebar() {
         ))}
       </nav>
       <div className="flex mt-auto gap-2">
-        <DropdownMenuCheckboxes />
+        <Dropdown />
       </div>
     </div>
   )
