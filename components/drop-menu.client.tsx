@@ -8,6 +8,8 @@ import {
   MessageSquare,
   Plus,
   PlusCircle,
+  ChevronDown,
+  ChevronUp,
   Settings,
   User,
   UserPlus,
@@ -29,13 +31,24 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu"
 import { Button } from "./ui/button"
-
+import { useState } from "react"
 export function Dropdown() {
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
-    <DropdownMenu>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
-        <Button variant="default" className="relative z-50">
-          Open
+        <Button
+          variant="default"
+          className="relative cursor-pointer  z-50 flex flex-row w-full justify-between"
+        >
+          <div className="flex flex-row items-center gap-2">
+            <div className="w-4 h-4 bg-white rounded-full" />
+            <span>Open</span>
+          </div>
+          <div className="transition-transform transition-timing-function-ease-in-out duration-200">
+            {isOpen ? <ChevronUp /> : <ChevronDown />}
+          </div>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 text-white bg-[#111111]/70 backdrop-blur-3xl">

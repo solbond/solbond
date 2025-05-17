@@ -45,7 +45,7 @@ export function Notification({ size = 20, className = "" }: IconProps) {
       className={className}
     >
       <title>Notification</title>
-      <g opacity="0.2" clipPath="url(#clip0_10938_1724)">
+      <g opacity="0.4" clipPath="url(#clip0_10938_1724)">
         <path
           d="M8.55664 17.5C8.70293 17.7533 8.91332 17.9637 9.16668 18.11C9.42003 18.2563 9.70743 18.3333 9.99997 18.3333C10.2925 18.3333 10.5799 18.2563 10.8333 18.11C11.0866 17.9637 11.297 17.7533 11.4433 17.5"
           stroke="white"
@@ -95,7 +95,7 @@ export function Search({ size = 20, className = "" }: IconProps) {
       className={className}
     >
       <title>Search</title>
-      <g opacity="0.2">
+      <g opacity="0.4">
         <path
           fillRule="evenodd"
           clipRule="evenodd"

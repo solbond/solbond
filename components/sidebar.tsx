@@ -48,7 +48,7 @@ export default function Sidebar() {
             href={item.href}
             className="flex items-center gap-3 px-4 py-2 rounded-lg opacity-70 hover:opacity-90 transition"
           >
-            <item.icon size={18} />
+            <item.icon size={14} />
             {item.label}
           </a>
         ))}
