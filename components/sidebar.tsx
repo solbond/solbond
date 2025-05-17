@@ -1,5 +1,26 @@
 import { Logo, Notification, Search } from "./icons"
 import { DropdownMenuCheckboxes } from "./drop-menu.client"
+import {
+  Columns2,
+  Package,
+  WalletCards,
+  UsersRound,
+  Activity,
+  DollarSign,
+  Star,
+  Settings,
+} from "lucide-react"
+
+const navigationItems = [
+  { href: "/", icon: Columns2, label: "Home" },
+  { href: "/products", icon: Package, label: "Products" },
+  { href: "/benefits", icon: Star, label: "Benefits" },
+  { href: "/customers", icon: UsersRound, label: "Customers" },
+  { href: "/sales", icon: WalletCards, label: "Sales" },
+  { href: "/analytics", icon: Activity, label: "Analytics" },
+  { href: "/finance", icon: DollarSign, label: "Finance" },
+  { href: "/settings", icon: Settings, label: "Settings" },
+]
 
 export default function Sidebar() {
   return (
@@ -20,7 +41,21 @@ export default function Sidebar() {
           />
         </div>
       </div>
-      <DropdownMenuCheckboxes />
+      <nav className="flex flex-col text-white text-sm font-medium gap-2 mt-8">
+        {navigationItems.map((item) => (
+          <a
+            key={item.href}
+            href={item.href}
+            className="flex items-center gap-3 px-4 py-2 rounded-lg opacity-70 hover:opacity-90 transition"
+          >
+            <item.icon size={18} />
+            {item.label}
+          </a>
+        ))}
+      </nav>
+      <div className="flex mt-auto gap-2">
+        <DropdownMenuCheckboxes />
+      </div>
     </div>
   )
 }
