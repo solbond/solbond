@@ -6,6 +6,15 @@ const auth = betterAuth({
   database: ronin(),
 })
 
+export const Link = model({
+  slug: "link",
+  fields: {
+    url: string({ required: true }), // without http:// or https://
+    title: string({ required: true }),
+    user: link({ required: true, target: "user" }),
+  },
+})
+
 export const User = model({
   slug: "user",
   fields: {
